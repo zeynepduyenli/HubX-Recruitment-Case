@@ -14,7 +14,9 @@ hiltNavigationVersion = "1.2.0"
 kspVersion = "2.0.21-1.0.26"
 roomVersion = "2.6.1"
 retrofitVersion = "2.11.0"
-okhttp-bom= "4.12.0"
+okhttp-bom = "4.12.0"
+navigation = "2.8.4"
+kotlinx-serialization = "1.6.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -30,18 +32,24 @@ hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hiltVersion" }
 hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigationVersion" }
 #Room DB
-room-runtime = {group = "androidx.room", name ="room-runtime", version.ref= "roomVersion"}
-room-ktx = {group = "androidx.room", name ="room-ktx", version.ref= "roomVersion"}
-room-compiler = {group = "androidx.room", name ="room-compiler", version.ref= "roomVersion"}
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomVersion" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomVersion" }
 #Retrofit and OkHttp
-retrofit = {group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion"}
-retrofit-serialization = {group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "retrofitVersion"}
-okHttp = {group = "com.squareup.okhttp3", name ="okhttp", version.ref= "okhttp-bom"}
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion" }
+retrofit-serialization = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "retrofitVersion" }
+okHttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp-bom" }
+#Navigation
+navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigation" }
+navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version.ref = "navigation" }
+kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 
 [bundles]
 hilt = ["hilt-android", "hilt-navigation"]
 room = ["room-runtime", "room-ktx"]
 retrofit = ["retrofit", "retrofit-serialization"]
+navigation = ["navigation-fragment", "navigation-ui"]
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
