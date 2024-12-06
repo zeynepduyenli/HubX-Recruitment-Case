@@ -12,7 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:overScrollMode="never"
-        app:layout_constraintBottom_toTopOf="@+id/pageIndicator"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,19 +29,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/pageIndicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_next"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@null"
-        app:layout_constraintStart_toStartOf="parent"
-        app:tabBackground="@drawable/viewpager_selector"
-        app:tabGravity="center"
-        app:tabIndicatorHeight="0dp" />
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_next"
         android:layout_width="0dp"
@@ -52,18 +39,33 @@
         android:elevation="0dp"
         android:fontFamily="@font/sf_pro_display_bold"
         android:textColor="@color/white"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toTopOf="@id/tv_terms"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/pageIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom= "54dp"
+        android:layout_marginHorizontal= "54dp"
+        android:background="@null"
+        app:tabBackground="@drawable/viewpager_selector"
+        app:tabGravity="center"
+        app:tabIndicatorHeight="0dp"
+        app:layout_constraintStart_toStartOf="@id/btn_next"
+        app:layout_constraintEnd_toEndOf="@id/btn_next"
+        app:layout_constraintBottom_toBottomOf="parent"  />
 
     <TextView
         android:id="@+id/tv_terms"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom= "48dp"
-        android:layout_marginHorizontal= "48dp"
+        android:layout_marginBottom= "54dp"
+        android:layout_marginHorizontal= "54dp"
         android:text="@string/onboarding_terms_and_policy"
-        android:textColor="@color/dark_green"
+        android:textColor="@color/pastel_green"
         android:textSize="12sp"
         android:textAlignment="center"
         android:fontFamily="@font/rubik"

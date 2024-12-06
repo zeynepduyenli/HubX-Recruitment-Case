@@ -7,13 +7,18 @@
     <string name="onboarding_terms_and_policy">By tapping next, you are agreeing to PlantID <u>Terms of Use</u> &amp; <u>Privacy Policy.</u> </string>
     <string name="get_started">Get Started</string>
     <string name="btn_continue">Continue</string>
-    <string name="onboarding_first_page_title">Welcome to <b>PlantApp</b></string>
+    <string name="onboarding_first_page_title_main">Welcome to </string>
+    <string name="onboarding_first_page_title_highlight"> PlantApp</string>
     <string name="onboarding_first_page_desc">Identify more than 3000+ plants and 88% accuracy.</string>
-    <string name="onboarding_second_page_title">Take a photo to <b>identify</b> the plant!</string>
-    <string name="onboarding_third_page_title">Get plant <b>care guides</b></string>
+    <string name="onboarding_second_page_title_main">Take a photo to</string>
+    <string name="onboarding_second_page_title_highlight"> identify</string>
+    <string name="onboarding_second_page_title_subtext">the plant!</string>
+    <string name="onboarding_third_page_title_main">Get plant</string>
+    <string name="onboarding_third_page_title_highlight">care guides</string>
     <string name="onboarding_trial_button">Try free for 3 days</string>
     <string name="onboarding_paywall_page_title"><![CDATA[<b>PlantApp</b> Premium]]></string>
     <string name="onboarding_paywall_page_desc">Access All Features</string>
     <string name="onboarding_image">Onboarding Image</string>
     <string name="overlay_effect">Overlay Effect</string>
+    <string name="brush_underline_effect">Brush Underline Effect</string>
 </resources>

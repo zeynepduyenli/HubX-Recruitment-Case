@@ -15,27 +15,39 @@ class OnboardingViewPagerAdapter(
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             START_SCREEN -> OnboardingItemFragment.newInstance(
-                context.resString(R.string.onboarding_first_page_title),
-                context.resString(R.string.onboarding_first_page_desc),
-                R.drawable.img_onboarding_first_screen
+                title = context.resString(R.string.onboarding_first_page_title_main),
+                highlight = context.resString(R.string.onboarding_first_page_title_highlight),
+                subtext = null,
+                underlineEnabled = false,
+                desc = context.resString(R.string.onboarding_first_page_desc),
+                img = R.drawable.img_onboarding_start_screen
             )
 
             FIRST_SCREEN -> OnboardingItemFragment.newInstance(
-                context.resString(R.string.onboarding_second_page_title),
-                null,
-                R.drawable.img_onboarding_second_screen
+                title = context.resString(R.string.onboarding_second_page_title_main),
+                highlight = context.resString(R.string.onboarding_second_page_title_highlight),
+                subtext = context.resString(R.string.onboarding_second_page_title_subtext),
+                underlineEnabled = true,
+                desc = null,
+                img = R.drawable.img_onboarding_second_screen
             )
 
             SECOND_SCREEN -> OnboardingItemFragment.newInstance(
-                context.resString(R.string.onboarding_third_page_title),
-                null,
-                R.drawable.img_onboarding_third_screen
+                title = context.resString(R.string.onboarding_third_page_title_main),
+                highlight = context.resString(R.string.onboarding_third_page_title_highlight),
+                subtext = null,
+                underlineEnabled = true,
+                desc = null,
+                img = R.drawable.img_onboarding_third_screen
             )
 
             PAYWALL_SCREEN -> OnboardingItemFragment.newInstance(
-                null,
-                null,
-                R.drawable.img_paywall
+                title = null,
+                highlight = null,
+                subtext = null,
+                underlineEnabled = false,
+                desc = null,
+                img = R.drawable.img_paywall
             )
 
             else -> throw IllegalArgumentException("Invalid position: $position")

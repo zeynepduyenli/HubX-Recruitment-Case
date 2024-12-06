@@ -35,6 +35,16 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
                             tvTerms.visibility = View.VISIBLE
                             clOnboarding.setBackgroundResource(R.drawable.onboarding_background)
                             requireActivity().window.setStatusBarTextColor(isLightText = false)
+                            ivOverlay.visibility = View.GONE
+                        }
+
+                        2 -> {
+                            pageIndicator.visibility = View.VISIBLE
+                            btnNext.text = getString(R.string.btn_continue)
+                            tvTerms.visibility = View.INVISIBLE
+                            clOnboarding.setBackgroundResource(R.drawable.onboarding_background)
+                            requireActivity().window.setStatusBarTextColor(isLightText = false)
+                            ivOverlay.visibility = View.VISIBLE
                         }
 
                         3 -> { // Paywall Screen
@@ -47,6 +57,7 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
                             )
                             ivOverlay.visibility = View.GONE
                             requireActivity().window.setStatusBarTextColor(isLightText = true)
+                            ivOverlay.visibility = View.GONE
                         }
 
                         else -> { // Middle Screens
@@ -55,6 +66,7 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
                             tvTerms.visibility = View.INVISIBLE
                             clOnboarding.setBackgroundResource(R.drawable.onboarding_background)
                             requireActivity().window.setStatusBarTextColor(isLightText = false)
+                            ivOverlay.visibility = View.GONE
                         }
                     }
                 }
