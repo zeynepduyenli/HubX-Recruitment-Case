@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="BoldTitleTextAppearance" parent="TextAppearance.AppCompat">
-        <item name="fontFamily">@font/rubik_extrabold</item>
+    <style name="RegularTitleTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik</item>
         <item name="android:textColor">@color/gray</item>
         <item name="android:textSize">24sp</item>
     </style>
 
-    <style name="RegularTitleTextAppearance" parent="TextAppearance.AppCompat">
-        <item name="fontFamily">@font/rubik</item>
+    <style name="MediumTitleTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik_medium</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="SemiBoldTitleTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik_semibold</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="BoldTitleTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="fontFamily">@font/rubik_extrabold</item>
         <item name="android:textColor">@color/gray</item>
         <item name="android:textSize">24sp</item>
     </style>

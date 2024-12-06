@@ -3,9 +3,11 @@ package com.zows.hubxrecruitmentcase.presentation.onboarding
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.zows.hubxrecruitmentcase.R
+import com.zows.hubxrecruitmentcase.common.hideIfAllTextIsBlank
+import com.zows.hubxrecruitmentcase.common.setVisibilityBasedOnCondition
+import com.zows.hubxrecruitmentcase.common.setVisibilityBasedOnText
 import com.zows.hubxrecruitmentcase.common.viewBinding
 import com.zows.hubxrecruitmentcase.databinding.FragmentOnboardingItemBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,6 +20,8 @@ class OnboardingItemFragment : Fragment(R.layout.fragment_onboarding_item) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        /* Can be more readable imo */
+
         with(binding) {
             arguments?.let {
                 layoutOnboardingTitle.tvMain.text = it.getString(ARG_TITLE_MAIN)
@@ -27,34 +31,36 @@ class OnboardingItemFragment : Fragment(R.layout.fragment_onboarding_item) {
                 ivOnboarding.setImageResource(it.getInt(ARG_IMG))
             }
 
-            if (layoutOnboardingTitle.tvSubtext.text.isNullOrBlank())
-                layoutOnboardingTitle.tvSubtext.visibility = View.GONE
-            if (layoutOnboardingTitle.tvMain.text.isNullOrBlank() &&
-                layoutOnboardingTitle.tvHighlight.text.isNullOrBlank() &&
-                layoutOnboardingTitle.tvSubtext.text.isNullOrBlank() &&
-                layoutOnboardingTitle.tvDesc.text.isNullOrBlank()
-            ) {
-                layoutOnboardingTitle.tvMain.visibility = View.GONE
-                layoutOnboardingTitle.tvHighlight.visibility = View.GONE
-                layoutOnboardingTitle.tvSubtext.visibility = View.GONE
-                layoutOnboardingTitle.tvDesc.visibility = View.GONE
+            listOf(
+                layoutOnboardingTitle.tvMain,
+                layoutOnboardingTitle.tvHighlight,
+                layoutOnboardingTitle.tvSubtext,
+                layoutOnboardingTitle.tvDesc
+            ).hideIfAllTextIsBlank().also {
                 layoutOnboardingTitle.underlineCurve.visibility = View.GONE
                 ivOnboarding.scaleType = ImageView.ScaleType.CENTER_CROP
             }
 
-            if (arguments?.getBoolean(ARG_UNDERLINE_BOOLEAN) == true)
-                layoutOnboardingTitle.underlineCurve.visibility = View.VISIBLE
-            else
-                layoutOnboardingTitle.underlineCurve.visibility = View.GONE
-
-            if (arguments?.getString(ARG_TITLE_MAIN) == getString(R.string.onboarding_first_page_title_main)) {
-
-                layoutOnboardingTitle.tvMain.setTextAppearance(R.style.RegularTitleTextAppearance)
-
+            when (arguments?.getString(ARG_TITLE_MAIN)) {
+                getString(R.string.onboarding_first_page_title_main) -> {
+                    layoutOnboardingTitle.tvMain.setTextAppearance(R.style.RegularTitleTextAppearance)
+                    layoutOnboardingTitle.tvHighlight.setTextAppearance(R.style.MediumTitleTextAppearance)
+                }
+                getString(R.string.onboarding_second_page_title_main), getString(R.string.onboarding_third_page_title_main) -> {
+                    layoutOnboardingTitle.tvMain.setTextAppearance(R.style.MediumTitleTextAppearance)
+                    layoutOnboardingTitle.tvHighlight.setTextAppearance(R.style.BoldTitleTextAppearance)
+                    layoutOnboardingTitle.tvSubtext.setTextAppearance(R.style.MediumTitleTextAppearance)
+                }
             }
+
+            layoutOnboardingTitle.tvSubtext.setVisibilityBasedOnText()
+            layoutOnboardingTitle.underlineCurve.setVisibilityBasedOnCondition(
+                arguments?.getBoolean(
+                    ARG_UNDERLINE_BOOLEAN
+                ) == true
+            )
+
         }
-
-
     }
 
     companion object {

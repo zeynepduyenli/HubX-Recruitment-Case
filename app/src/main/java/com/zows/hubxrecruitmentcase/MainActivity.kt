@@ -1,8 +1,6 @@
 package com.zows.hubxrecruitmentcase
 
-import android.os.Build
 import android.os.Bundle
-import android.view.WindowInsetsController
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.zows.hubxrecruitmentcase.common.viewBinding
