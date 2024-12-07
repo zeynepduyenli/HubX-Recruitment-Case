@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
@@ -31,7 +30,8 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
 
         with(binding) {
 
-            val pulseAnimation: Animation = AnimationUtils.loadAnimation(context, R.anim.pulse_animation)
+            val pulseAnimation: Animation =
+                AnimationUtils.loadAnimation(context, R.anim.pulse_animation)
             btnNext.startAnimation(pulseAnimation)
             viewPager.isUserInputEnabled = false
             viewPager.adapter = OnboardingViewPagerAdapter(requireActivity(), requireContext())
@@ -98,7 +98,6 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
             }
         }
     }
-
 
 
     private fun getItem(): Int {

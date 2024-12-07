@@ -30,7 +30,8 @@ class OnboardingItemFragment : Fragment(R.layout.fragment_onboarding_item) {
             }
 
 
-            val pulseAnimation: Animation = AnimationUtils.loadAnimation(context, R.anim.pulse_animation)
+            val pulseAnimation: Animation =
+                AnimationUtils.loadAnimation(context, R.anim.pulse_animation)
             layoutPremium.btnNext.startAnimation(pulseAnimation)
 
             when (arguments?.getString(ARG_TITLE_MAIN)) {
