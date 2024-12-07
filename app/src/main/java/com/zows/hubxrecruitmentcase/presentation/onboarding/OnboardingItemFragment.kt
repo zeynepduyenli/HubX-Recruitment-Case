@@ -2,13 +2,11 @@ package com.zows.hubxrecruitmentcase.presentation.onboarding
 
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.zows.hubxrecruitmentcase.R
-import com.zows.hubxrecruitmentcase.common.hideIfAllTextIsBlank
 import com.zows.hubxrecruitmentcase.common.setVisibilityBasedOnCondition
-import com.zows.hubxrecruitmentcase.common.setVisibilityBasedOnMultipleConditions
 import com.zows.hubxrecruitmentcase.common.setVisibilityBasedOnText
 import com.zows.hubxrecruitmentcase.common.viewBinding
 import com.zows.hubxrecruitmentcase.databinding.FragmentOnboardingItemBinding
@@ -22,8 +20,6 @@ class OnboardingItemFragment : Fragment(R.layout.fragment_onboarding_item) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /* Can be written more readable imo */
-
         with(binding) {
             arguments?.let {
                 layoutOnboardingTitle.tvMain.text = it.getString(ARG_TITLE_MAIN)
@@ -33,37 +29,22 @@ class OnboardingItemFragment : Fragment(R.layout.fragment_onboarding_item) {
                 ivOnboarding.setImageResource(it.getInt(ARG_IMG))
             }
 
-            listOf(
-                layoutOnboardingTitle.tvMain,
-                layoutOnboardingTitle.tvHighlight,
-                layoutOnboardingTitle.tvSubtext,
-                layoutOnboardingTitle.tvDesc
-            ).hideIfAllTextIsBlank()
 
-            val textViews = listOf(
-                layoutOnboardingTitle.tvMain,
-                layoutOnboardingTitle.tvHighlight,
-                layoutOnboardingTitle.tvSubtext
-            )
-
-            ivOnboarding.scaleType = ImageView.ScaleType.CENTER_CROP
-
-            textViews.setVisibilityBasedOnMultipleConditions(layoutPremium.clPremium, ivOnboarding)
-
-            layoutPremium.ivClose.setOnClickListener {
-                findNavController().navigate(R.id.onBoardingToHome)
-            }
+            val pulseAnimation: Animation = AnimationUtils.loadAnimation(context, R.anim.pulse_animation)
+            layoutPremium.btnNext.startAnimation(pulseAnimation)
 
             when (arguments?.getString(ARG_TITLE_MAIN)) {
                 getString(R.string.onboarding_first_page_title_main) -> {
                     layoutOnboardingTitle.tvMain.setTextAppearance(R.style.RegularTitleTextAppearance)
                     layoutOnboardingTitle.tvHighlight.setTextAppearance(R.style.MediumTitleTextAppearance)
+                    ivOverlay.visibility = View.INVISIBLE
                 }
 
                 getString(R.string.onboarding_second_page_title_main), getString(R.string.onboarding_third_page_title_main) -> {
                     layoutOnboardingTitle.tvMain.setTextAppearance(R.style.MediumTitleTextAppearance)
                     layoutOnboardingTitle.tvHighlight.setTextAppearance(R.style.BoldTitleTextAppearance)
                     layoutOnboardingTitle.tvSubtext.setTextAppearance(R.style.MediumTitleTextAppearance)
+                    ivOverlay.visibility = View.VISIBLE
                 }
             }
 

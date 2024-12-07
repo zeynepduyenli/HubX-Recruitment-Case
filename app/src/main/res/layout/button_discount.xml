@@ -59,7 +59,7 @@
             style="@style/MediumTitleTextAppearance"
             android:textSize="12sp"
             android:textColor="@color/white"
-            android:padding="4dp"
+            android:padding="6dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name">HubX Recruitment Case</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">PlantApp</string>
     <string name="onboarding_title">Onboarding Title</string>
     <string name="onboarding_description">Onboarding Description</string>
     <string name="onboarding_terms_and_policy">By tapping next, you are agreeing to PlantID <u>Terms of Use</u> &amp; <u>Privacy Policy.</u> </string>
@@ -41,4 +39,5 @@
     <string name="basic_offer_desc">$2.99/month, auto renewable</string>
     <string name="discount_percentage">Save 50%</string>
     <string name="close_icon">Close Icon</string>
+    <string name="paywall_background_image">Paywall Background Image</string>
 </resources>

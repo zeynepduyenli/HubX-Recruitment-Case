@@ -4,5 +4,5 @@
     <corners android:radius="14dp" />
     <gradient
         android:endColor="@color/transparent_btn_green"
-        android:startColor="@color/card_bg_gray" />
+        android:startColor="@color/dark_green" />
 </shape>

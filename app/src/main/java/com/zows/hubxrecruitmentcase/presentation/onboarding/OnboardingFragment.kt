@@ -2,6 +2,9 @@ package com.zows.hubxrecruitmentcase.presentation.onboarding
 
 import android.os.Bundle
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
@@ -12,75 +15,67 @@ import com.zows.hubxrecruitmentcase.common.viewBinding
 import com.zows.hubxrecruitmentcase.databinding.FragmentOnboardingBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
 
     private val binding by viewBinding(FragmentOnboardingBinding::bind)
+
+    private val drawables = intArrayOf(
+        R.drawable.onboarding_bg_vibrant,
+        R.drawable.onboarding_bg_subtle
+    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
 
+            val pulseAnimation: Animation = AnimationUtils.loadAnimation(context, R.anim.pulse_animation)
+            btnNext.startAnimation(pulseAnimation)
+            viewPager.isUserInputEnabled = false
             viewPager.adapter = OnboardingViewPagerAdapter(requireActivity(), requireContext())
             viewPager.offscreenPageLimit = 1
-
             viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
 
                 override fun onPageSelected(position: Int) {
                     when (position) {
-                        0 -> { // Start Screen
+                        0 -> {
+                            clOnboarding.setBackgroundResource(drawables[0])
+
                             pageIndicator.visibility = View.INVISIBLE
                             btnNext.text = getString(R.string.get_started)
                             tvTerms.visibility = View.VISIBLE
-                            clOnboarding.setBackgroundResource(R.drawable.onboarding_background)
                             requireActivity().window.setStatusBarTextColor(isLightText = false)
-                            ivOverlay.visibility = View.GONE
-                            tvChargeNote.visibility = View.INVISIBLE
-                            tvChargeFooter.visibility = View.INVISIBLE
+                        }
+
+                        1 -> {
+                            clOnboarding.setBackgroundResource(drawables[1])
+                            pageIndicator.visibility = View.VISIBLE
+                            btnNext.text = getString(R.string.btn_continue)
+                            tvTerms.visibility = View.INVISIBLE
+                            requireActivity().window.setStatusBarTextColor(isLightText = false)
                         }
 
                         2 -> {
+                            clOnboarding.setBackgroundResource(drawables[1])
                             pageIndicator.visibility = View.VISIBLE
                             btnNext.text = getString(R.string.btn_continue)
                             tvTerms.visibility = View.INVISIBLE
-                            clOnboarding.setBackgroundResource(R.drawable.onboarding_background)
                             requireActivity().window.setStatusBarTextColor(isLightText = false)
-                            ivOverlay.visibility = View.VISIBLE
-                            tvChargeNote.visibility = View.INVISIBLE
-                            tvChargeFooter.visibility = View.INVISIBLE
                         }
 
-                        3 -> { // Paywall Screen
-                            pageIndicator.visibility = View.INVISIBLE
-                            btnNext.text = getString(R.string.onboarding_trial_button)
-                            tvTerms.visibility = View.INVISIBLE
-                            clOnboarding.background = null
-                            clOnboarding.setBackgroundColor(
-                                resources.getColor(R.color.dark_green, null)
-                            )
-                            ivOverlay.visibility = View.GONE
+                        else -> { // Paywall Screen
+                            btnNext.clearAnimation()
+                            btnNext.visibility = View.GONE
+                            frameFooter.visibility = View.GONE
                             requireActivity().window.setStatusBarTextColor(isLightText = true)
-                            ivOverlay.visibility = View.GONE
-                            tvChargeNote.visibility = View.VISIBLE
-                            tvChargeFooter.visibility = View.VISIBLE
                         }
 
-                        else -> { // Middle Screens
-                            pageIndicator.visibility = View.VISIBLE
-                            btnNext.text = getString(R.string.btn_continue)
-                            tvTerms.visibility = View.INVISIBLE
-                            clOnboarding.setBackgroundResource(R.drawable.onboarding_background)
-                            requireActivity().window.setStatusBarTextColor(isLightText = false)
-                            ivOverlay.visibility = View.GONE
-                            tvChargeNote.visibility = View.INVISIBLE
-                            tvChargeFooter.visibility = View.INVISIBLE
-                        }
+
                     }
                 }
 
-
-                override fun onPageScrolled(arg0: Int, arg1: Float, arg2: Int) = Unit
                 override fun onPageScrollStateChanged(arg0: Int) = Unit
             })
 
@@ -93,7 +88,6 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
                 }
             }.attach()
 
-
             btnNext.setOnClickListener {
                 val lastPageIndex = viewPager.adapter?.itemCount?.minus(1) ?: 0
                 if (getItem() == lastPageIndex) {
@@ -104,6 +98,8 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
             }
         }
     }
+
+
 
     private fun getItem(): Int {
         return binding.viewPager.currentItem

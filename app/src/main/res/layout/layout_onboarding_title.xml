@@ -37,9 +37,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:contentDescription="@string/brush_underline_effect"
-        android:src="@drawable/img_brush"
+        android:src="@drawable/brush"
         app:layout_constraintStart_toStartOf="@id/tv_highlight"
-        app:layout_constraintTop_toTopOf="@id/tv_highlight"
+        app:layout_constraintTop_toBottomOf="@id/tv_highlight"
         app:layout_constraintEnd_toEndOf="@id/tv_highlight" />
 
     <TextView

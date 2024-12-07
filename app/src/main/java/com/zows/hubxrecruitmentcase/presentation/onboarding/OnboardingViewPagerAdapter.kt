@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.zows.hubxrecruitmentcase.R
+import com.zows.hubxrecruitmentcase.presentation.paywall.PaywallFragment
 
 class OnboardingViewPagerAdapter(
     fragmentActivity: FragmentActivity,
@@ -20,7 +21,7 @@ class OnboardingViewPagerAdapter(
                 subtext = null,
                 underlineEnabled = false,
                 desc = context.resString(R.string.onboarding_first_page_desc),
-                img = R.drawable.img_onboarding_start_screen
+                img = R.drawable.onboarding_01
             )
 
             FIRST_SCREEN -> OnboardingItemFragment.newInstance(
@@ -29,7 +30,7 @@ class OnboardingViewPagerAdapter(
                 subtext = context.resString(R.string.onboarding_second_page_title_subtext),
                 underlineEnabled = true,
                 desc = null,
-                img = R.drawable.img_onboarding_second_screen
+                img = R.drawable.onboarding_02
             )
 
             SECOND_SCREEN -> OnboardingItemFragment.newInstance(
@@ -38,17 +39,10 @@ class OnboardingViewPagerAdapter(
                 subtext = null,
                 underlineEnabled = true,
                 desc = null,
-                img = R.drawable.img_onboarding_third_screen
+                img = R.drawable.onboarding_03
             )
 
-            PAYWALL_SCREEN -> OnboardingItemFragment.newInstance(
-                title = null,
-                highlight = null,
-                subtext = null,
-                underlineEnabled = false,
-                desc = null,
-                img = R.drawable.img_paywall
-            )
+            PAYWALL_SCREEN -> PaywallFragment.newInstance()
 
             else -> throw IllegalArgumentException("Invalid position: $position")
 
