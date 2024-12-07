@@ -21,7 +21,7 @@ class PaywallFragment : Fragment(R.layout.fragment_paywall) {
             AnimationUtils.loadAnimation(context, R.anim.pulse_animation)
 
         with(binding) {
-            layoutPremium.btnNext.startAnimation(pulseAnimation)
+            layoutPremium.btnPulse.startAnimation(pulseAnimation)
 
             ivClose.setOnClickListener {
                 findNavController().navigate(R.id.onBoardingToHome)

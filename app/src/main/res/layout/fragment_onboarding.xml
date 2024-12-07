@@ -16,6 +16,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_pulse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_tint"
+        android:clickable="false"
+        app:layout_constraintTop_toTopOf="@id/btn_next"
+        app:layout_constraintBottom_toBottomOf="@id/btn_next"
+        app:layout_constraintEnd_toEndOf="@id/btn_next"
+        app:layout_constraintStart_toStartOf="@id/btn_next" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_next"
@@ -31,6 +41,7 @@
         app:layout_constraintBottom_toTopOf="@id/frame_footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frame_footer"
