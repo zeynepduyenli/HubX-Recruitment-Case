@@ -4,6 +4,7 @@ import android.os.Build
 import android.view.View
 import android.view.Window
 import android.view.WindowInsetsController
+import android.widget.ImageView
 import android.widget.TextView
 
 fun Window.setStatusBarTextColor(isLightText: Boolean) {
@@ -43,4 +44,16 @@ fun List<TextView>.hideIfAllTextIsBlank() {
     if (isAllTextEmpty) {
         forEach { it.visibility = View.GONE }
     }
+}
+
+fun List<TextView>.setVisibilityBasedOnMultipleConditions(targetView: View, img: ImageView) {
+    val isAllTextEmpty = all { it.text.isNullOrBlank() }
+    if (isAllTextEmpty) {
+        targetView.visibility = View.VISIBLE
+        img.scaleType = ImageView.ScaleType.FIT_START
+
+    } else {
+        View.GONE
+    }
+
 }

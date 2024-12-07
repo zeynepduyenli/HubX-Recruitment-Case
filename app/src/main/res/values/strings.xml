@@ -21,4 +21,24 @@
     <string name="onboarding_image">Onboarding Image</string>
     <string name="overlay_effect">Overlay Effect</string>
     <string name="brush_underline_effect">Brush Underline Effect</string>
+    <string name="premium">Premium</string>
+    <string name="plant_app">Plant App</string>
+    <string name="premium_desc">Access All Features</string>
+    <string name="scanner_icon">scanner icon</string>
+    <string name="unlimited">Unlimited</string>
+    <string name="plant_identify">Plant Identify</string>
+    <string name="process">Process</string>
+    <string name="faster">Faster</string>
+    <string name="speedometer_icon">speedometer icon</string>
+    <string name="detailed">Detailed</string>
+    <string name="plant_care">Plant care</string>
+    <string name="treatment_icon">Treatment Icon</string>
+    <string name="premium_charge_note">After the 3-day free trial period you’ll be charged ₺274.99 per year unless you cancel before the trial expires. Yearly Subscription is Auto-Renewable</string>
+    <string name="premium_footer">Terms  •  Privacy  •  Restore</string>
+    <string name="first_offer_title">1 Year</string>
+    <string name="basic_offer_title">1 Month</string>
+    <string name="first_offer_desc">First 3 days free, then $529.99/year</string>
+    <string name="basic_offer_desc">$2.99/month, auto renewable</string>
+    <string name="discount_percentage">Save 50%</string>
+    <string name="close_icon">Close Icon</string>
 </resources>

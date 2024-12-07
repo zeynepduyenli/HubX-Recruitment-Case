@@ -36,6 +36,8 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
                             clOnboarding.setBackgroundResource(R.drawable.onboarding_background)
                             requireActivity().window.setStatusBarTextColor(isLightText = false)
                             ivOverlay.visibility = View.GONE
+                            tvChargeNote.visibility = View.INVISIBLE
+                            tvChargeFooter.visibility = View.INVISIBLE
                         }
 
                         2 -> {
@@ -45,6 +47,8 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
                             clOnboarding.setBackgroundResource(R.drawable.onboarding_background)
                             requireActivity().window.setStatusBarTextColor(isLightText = false)
                             ivOverlay.visibility = View.VISIBLE
+                            tvChargeNote.visibility = View.INVISIBLE
+                            tvChargeFooter.visibility = View.INVISIBLE
                         }
 
                         3 -> { // Paywall Screen
@@ -58,6 +62,8 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
                             ivOverlay.visibility = View.GONE
                             requireActivity().window.setStatusBarTextColor(isLightText = true)
                             ivOverlay.visibility = View.GONE
+                            tvChargeNote.visibility = View.VISIBLE
+                            tvChargeFooter.visibility = View.VISIBLE
                         }
 
                         else -> { // Middle Screens
@@ -67,6 +73,8 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
                             clOnboarding.setBackgroundResource(R.drawable.onboarding_background)
                             requireActivity().window.setStatusBarTextColor(isLightText = false)
                             ivOverlay.visibility = View.GONE
+                            tvChargeNote.visibility = View.INVISIBLE
+                            tvChargeFooter.visibility = View.INVISIBLE
                         }
                     }
                 }
@@ -94,7 +102,6 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
                     viewPager.setCurrentItem(getItem() + 1, true)
                 }
             }
-
         }
     }
 

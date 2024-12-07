@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.zows.hubxrecruitmentcase.R
 import com.zows.hubxrecruitmentcase.common.hideIfAllTextIsBlank
 import com.zows.hubxrecruitmentcase.common.setVisibilityBasedOnCondition
+import com.zows.hubxrecruitmentcase.common.setVisibilityBasedOnMultipleConditions
 import com.zows.hubxrecruitmentcase.common.setVisibilityBasedOnText
 import com.zows.hubxrecruitmentcase.common.viewBinding
 import com.zows.hubxrecruitmentcase.databinding.FragmentOnboardingItemBinding
@@ -20,7 +22,7 @@ class OnboardingItemFragment : Fragment(R.layout.fragment_onboarding_item) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /* Can be more readable imo */
+        /* Can be written more readable imo */
 
         with(binding) {
             arguments?.let {
@@ -36,9 +38,20 @@ class OnboardingItemFragment : Fragment(R.layout.fragment_onboarding_item) {
                 layoutOnboardingTitle.tvHighlight,
                 layoutOnboardingTitle.tvSubtext,
                 layoutOnboardingTitle.tvDesc
-            ).hideIfAllTextIsBlank().also {
-                layoutOnboardingTitle.underlineCurve.visibility = View.GONE
-                ivOnboarding.scaleType = ImageView.ScaleType.CENTER_CROP
+            ).hideIfAllTextIsBlank()
+
+            val textViews = listOf(
+                layoutOnboardingTitle.tvMain,
+                layoutOnboardingTitle.tvHighlight,
+                layoutOnboardingTitle.tvSubtext
+            )
+
+            ivOnboarding.scaleType = ImageView.ScaleType.CENTER_CROP
+
+            textViews.setVisibilityBasedOnMultipleConditions(layoutPremium.clPremium, ivOnboarding)
+
+            layoutPremium.ivClose.setOnClickListener {
+                findNavController().navigate(R.id.onBoardingToHome)
             }
 
             when (arguments?.getString(ARG_TITLE_MAIN)) {
@@ -46,6 +59,7 @@ class OnboardingItemFragment : Fragment(R.layout.fragment_onboarding_item) {
                     layoutOnboardingTitle.tvMain.setTextAppearance(R.style.RegularTitleTextAppearance)
                     layoutOnboardingTitle.tvHighlight.setTextAppearance(R.style.MediumTitleTextAppearance)
                 }
+
                 getString(R.string.onboarding_second_page_title_main), getString(R.string.onboarding_third_page_title_main) -> {
                     layoutOnboardingTitle.tvMain.setTextAppearance(R.style.MediumTitleTextAppearance)
                     layoutOnboardingTitle.tvHighlight.setTextAppearance(R.style.BoldTitleTextAppearance)
@@ -59,7 +73,6 @@ class OnboardingItemFragment : Fragment(R.layout.fragment_onboarding_item) {
                     ARG_UNDERLINE_BOOLEAN
                 ) == true
             )
-
         }
     }
 
