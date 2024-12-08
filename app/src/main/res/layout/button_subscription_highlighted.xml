@@ -1,6 +1,7 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_highlighted_subscription"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="16dp"
@@ -11,13 +12,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/btn_discount_offer">
+        android:background="@drawable/button_subscription_highlighted_background">
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
+        <ImageView
             android:id="@+id/radioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:buttonTint="@color/green"
+            android:contentDescription="@string/radio_button"
+            android:src="@drawable/radio_button_selector"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_marginStart="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -28,6 +32,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginVertical="12dp"
+            android:layout_marginStart="@dimen/_8sdp"
             app:layout_constraintStart_toEndOf="@id/radioButton"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" >
@@ -54,7 +59,7 @@
             android:id="@+id/tvBadge"
             android:layout_width="wrap_content"
             android:layout_height="28dp"
-            android:background="@drawable/card_percentage"
+            android:background="@drawable/background_subscription_discount_percentage"
             android:text="@string/discount_percentage"
             style="@style/MediumTitleTextAppearance"
             android:textSize="12sp"

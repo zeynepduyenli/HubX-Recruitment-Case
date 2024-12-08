@@ -2,9 +2,10 @@ package com.zows.hubxrecruitmentcase.common
 
 import android.os.Build
 import android.view.View
+import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowInsetsController
-import android.widget.TextView
+import androidx.core.util.TypedValueCompat.dpToPx
 
 fun Window.setStatusBarTextColor(isLightText: Boolean) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -30,10 +31,13 @@ fun Window.setStatusBarTextColor(isLightText: Boolean) {
     }
 }
 
-fun TextView.setVisibilityBasedOnText() {
-    visibility = if (text.isNullOrBlank()) View.GONE else View.VISIBLE
+fun View.setStartMargin(start: Int? = null) {
+    val displayMetrics = resources.displayMetrics
+    layoutParams<ViewGroup.MarginLayoutParams> {
+        start?.run { leftMargin = dpToPx(this.toFloat(), displayMetrics).toInt() }
+    }
 }
 
-fun View.setVisibilityBasedOnCondition(condition: Boolean) {
-    visibility = if (condition) View.VISIBLE else View.GONE
+inline fun <reified T : ViewGroup.LayoutParams> View.layoutParams(block: T.() -> Unit) {
+    if (layoutParams is T) block(layoutParams as T)
 }

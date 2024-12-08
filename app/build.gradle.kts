@@ -62,4 +62,6 @@ dependencies {
     implementation(libs.okHttp)
     /*navigation*/
     implementation(libs.bundles.navigation)
+    /*resizable dimens */
+    implementation(libs.bundles.sspSdp)
 }

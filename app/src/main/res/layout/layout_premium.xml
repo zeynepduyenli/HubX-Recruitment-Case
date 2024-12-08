@@ -1,165 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cl_premium"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/_200sdp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_name"
+        style="@style/ExtraBoldTitleTextAppearance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_24sdp"
+        android:text="@string/plant_app"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/tv_premium_desc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_premium"
+        style="@style/LightTitleTextAppearance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:text="@string/premium"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/tv_premium_desc"
+        app:layout_constraintStart_toEndOf="@id/tv_name"
+        app:layout_constraintTop_toTopOf="@+id/tv_name" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_premium_desc"
+        style="@style/LightTitleTextAppearance"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:text="@string/premium_desc"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_17ssp"
+        app:layout_constraintEnd_toEndOf="@id/tv_premium"
+        app:layout_constraintStart_toStartOf="@id/tv_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+    <include
+        android:id="@+id/premium_cards"
+        layout="@layout/layout_premium_cards"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_premium_desc" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_24sdp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/premium_cards"
+        app:layout_constraintVertical_bias="1.0">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_name"
-            style="@style/ExtraBoldTitleTextAppearance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/plant_app"
-            android:textColor="@color/white"
-            android:layout_marginHorizontal="24dp"
-            app:layout_constraintBottom_toTopOf="@id/tv_premium_desc"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_premium"
-            style="@style/LightTitleTextAppearance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="4dp"
-            android:text="@string/premium"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@id/tv_premium_desc"
-            app:layout_constraintStart_toEndOf="@id/tv_name"
-            app:layout_constraintTop_toTopOf="@+id/tv_name" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_premium_desc"
-            style="@style/LightTitleTextAppearance"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/premium_desc"
-            android:textColor="@color/white"
-            android:textSize="17sp"
-            android:layout_marginTop="4dp"
-            app:layout_constraintEnd_toEndOf="@id/tv_premium"
-            app:layout_constraintStart_toStartOf="@id/tv_name"
-            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_12sdp" />
 
         <include
-            android:id="@+id/premium_cards"
-            layout="@layout/layout_premium_cards"
+            android:id="@+id/btn_subscription_regular"
+            layout="@layout/button_subscription_regular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_12sdp" />
+
+        <include
+            android:id="@+id/btn_subscription_highlighted"
+            layout="@layout/button_subscription_highlighted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_16sdp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
+            style="@style/OnboardingPrimaryButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_premium_desc" />
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginHorizontal="24dp"
+            android:text="@string/onboarding_trial_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/premium_cards"
-            app:layout_constraintVertical_bias="1.0">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="24dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_8sdp" />
 
-            <include
-                android:id="@+id/btn_offer"
-                layout="@layout/button_offer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_charge_note"
+            style="@style/LightTitleTextAppearance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/premium_charge_note"
+            android:textAlignment="center"
+            android:textColor="@color/pastel_green"
+            android:textSize="@dimen/_9ssp" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="16dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_8sdp" />
 
-            <include
-                android:id="@+id/btn_discount"
-                layout="@layout/button_discount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_charge_footer"
+            style="@style/MediumTitleTextAppearance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/premium_footer"
+            android:textAlignment="center"
+            android:textColor="@color/pastel_green"
+            android:textSize="@dimen/_10ssp" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="28dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_44sdp" />
+    </LinearLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_buttons"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_pulse"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:clickable="false"
-                    android:background="@drawable/button_tint"
-                    app:layout_constraintBottom_toBottomOf="@id/btn_next"
-                    app:layout_constraintEnd_toEndOf="@id/btn_next"
-                    app:layout_constraintStart_toStartOf="@id/btn_next"
-                    app:layout_constraintTop_toTopOf="@id/btn_next" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_next"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/btn_main_green"
-                    android:elevation="0dp"
-                    android:fontFamily="@font/sf_pro_display_bold"
-                    android:text="@string/onboarding_trial_button"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="8dp" />
-
-            <TextView
-                android:id="@+id/tv_charge_note"
-                style="@style/LightTitleTextAppearance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/premium_charge_note"
-                android:textAlignment="center"
-                android:textColor="@color/pastel_green"
-                android:textSize="11sp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="10dp" />
-
-            <TextView
-                android:id="@+id/tv_charge_footer"
-                style="@style/MediumTitleTextAppearance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/premium_footer"
-                android:textAlignment="center"
-                android:textColor="@color/pastel_green"
-                android:textSize="12sp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="44dp" />
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

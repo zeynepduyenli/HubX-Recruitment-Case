@@ -26,15 +26,14 @@
         <ImageView
             android:id="@+id/iv_onboarding"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="22dp"
+            android:layout_height="0dp"
             android:contentDescription="@string/onboarding_image"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_overlay"
+            android:scaleType="center"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/onboarding_02" />
+            tools:src="@drawable/onboarding_01" />
 
         <ImageView
             android:id="@+id/iv_overlay"
@@ -48,17 +47,4 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/overlay" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <include
-        android:id="@+id/layout_premium"
-        layout="@layout/layout_premium"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="16dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/cl_images"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

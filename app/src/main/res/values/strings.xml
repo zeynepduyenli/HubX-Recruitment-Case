@@ -22,7 +22,7 @@
     <string name="premium">Premium</string>
     <string name="plant_app">Plant App</string>
     <string name="premium_desc">Access All Features</string>
-    <string name="scanner_icon">scanner icon</string>
+    <string name="icon">Icon</string>
     <string name="unlimited">Unlimited</string>
     <string name="plant_identify">Plant Identify</string>
     <string name="process">Process</string>
@@ -40,4 +40,5 @@
     <string name="discount_percentage">Save 50%</string>
     <string name="close_icon">Close Icon</string>
     <string name="paywall_background_image">Paywall Background Image</string>
+    <string name="radio_button">radio button</string>
 </resources>

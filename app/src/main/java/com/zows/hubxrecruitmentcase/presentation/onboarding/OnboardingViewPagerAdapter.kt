@@ -1,10 +1,14 @@
 package com.zows.hubxrecruitmentcase.presentation.onboarding
 
 import android.content.Context
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.Scroller
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.zows.hubxrecruitmentcase.R
 import com.zows.hubxrecruitmentcase.presentation.paywall.PaywallFragment
 
@@ -16,6 +20,7 @@ class OnboardingViewPagerAdapter(
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             START_SCREEN -> OnboardingItemFragment.newInstance(
+                index = position,
                 title = context.resString(R.string.onboarding_first_page_title_main),
                 highlight = context.resString(R.string.onboarding_first_page_title_highlight),
                 subtext = null,
@@ -25,6 +30,7 @@ class OnboardingViewPagerAdapter(
             )
 
             FIRST_SCREEN -> OnboardingItemFragment.newInstance(
+                index = position,
                 title = context.resString(R.string.onboarding_second_page_title_main),
                 highlight = context.resString(R.string.onboarding_second_page_title_highlight),
                 subtext = context.resString(R.string.onboarding_second_page_title_subtext),
@@ -34,6 +40,7 @@ class OnboardingViewPagerAdapter(
             )
 
             SECOND_SCREEN -> OnboardingItemFragment.newInstance(
+                index = position,
                 title = context.resString(R.string.onboarding_third_page_title_main),
                 highlight = context.resString(R.string.onboarding_third_page_title_highlight),
                 subtext = null,

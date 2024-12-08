@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cl_onboarding"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,30 +15,27 @@
         app:layout_constraintBottom_toBottomOf="@id/btn_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@drawable/onboarding_01"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_pulse"
+        android:id="@+id/btn_bubble"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_tint"
+        android:background="@drawable/button_onboarding_bubble_background"
         android:clickable="false"
-        app:layout_constraintTop_toTopOf="@id/btn_next"
         app:layout_constraintBottom_toBottomOf="@id/btn_next"
         app:layout_constraintEnd_toEndOf="@id/btn_next"
-        app:layout_constraintStart_toStartOf="@id/btn_next" />
+        app:layout_constraintStart_toStartOf="@id/btn_next"
+        app:layout_constraintTop_toTopOf="@id/btn_next" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_next"
+        style="@style/OnboardingPrimaryButtonStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/btn_main_green"
-        android:elevation="0dp"
-        android:fontFamily="@font/sf_pro_display_bold"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
+        android:layout_marginHorizontal="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
         app:layout_constraintBottom_toTopOf="@id/frame_footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -45,12 +43,12 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frame_footer"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="@dimen/_48sdp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintEnd_toEndOf="@+id/btn_bubble"
+        app:layout_constraintStart_toStartOf="@+id/btn_bubble">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/pageIndicator"
@@ -58,9 +56,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@null"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tabBackground="@drawable/viewpager_selector"
             app:tabGravity="center"
@@ -68,18 +66,14 @@
 
         <TextView
             android:id="@+id/tv_terms"
+            style="@style/OnboardingTermsTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|bottom"
-            android:fontFamily="@font/rubik"
             android:text="@string/onboarding_terms_and_policy"
-            android:textAlignment="center"
-            android:textColor="@color/pastel_green"
-            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
