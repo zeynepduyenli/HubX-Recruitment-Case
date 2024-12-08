@@ -8,14 +8,12 @@ import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.zows.hubxrecruitmentcase.R
 import com.zows.hubxrecruitmentcase.common.setStatusBarTextColor
 import com.zows.hubxrecruitmentcase.common.viewBinding
 import com.zows.hubxrecruitmentcase.databinding.FragmentOnboardingBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.abs
 
 
 @AndroidEntryPoint

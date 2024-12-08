@@ -25,11 +25,13 @@ class CardAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
-        val binding = LayoutCardItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            LayoutCardItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CardViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: CardViewHolder, position: Int) = holder.bind(cardItems[position], position)
+    override fun onBindViewHolder(holder: CardViewHolder, position: Int) =
+        holder.bind(cardItems[position], position)
 
     override fun getItemCount(): Int = cardItems.size
 }
