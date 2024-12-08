@@ -2,4 +2,19 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="onboarding_bg">#FFFDFFFE</color>
+
+    <color name="green">#FF28AF6E</color>
+    <color name="pastel_green">#FF899B93</color>
+    <color name="dark_green">#FF101E17</color>
+
+    <color name="light_gray">#FFC4C8C6</color>
+    <color name="dark_gray">#FF5B5B5B</color>
+    <color name="gray">#FF13231B</color>
+    <color name="card_bg_gray">#FF303030</color>
+    <color name="transparent_card_bg_gray">#14FFFFFF</color>
+    <color name="transparent_dark_card_bg_gray">#145B5B5B</color>
+    <color name="transparent_btn_green">#8028AF6E</color>
+    <color name="icon_bg_gray">#3D000000</color>
+
 </resources>

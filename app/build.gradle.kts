@@ -19,6 +19,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -56,4 +60,8 @@ dependencies {
     /*retrofit */
     implementation(libs.bundles.retrofit)
     implementation(libs.okHttp)
+    /*navigation*/
+    implementation(libs.bundles.navigation)
+    /*resizable dimens */
+    implementation(libs.bundles.sspSdp)
 }

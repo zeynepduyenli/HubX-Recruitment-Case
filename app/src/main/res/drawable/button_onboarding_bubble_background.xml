@@ -1,0 +1,8 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#00000000"/> <!-- Transparent background -->
+    <stroke
+        android:width="2dp"
+        android:color="@color/green"/> <!-- Glow color -->
+    <corners android:radius="@dimen/corner_radius_large" />
+    <size android:height="@dimen/bottom_navigation_height"/>
+</shape>
