@@ -17,7 +17,6 @@ import com.zows.hubxrecruitmentcase.R
 import com.zows.hubxrecruitmentcase.common.setStatusBarTextColor
 import com.zows.hubxrecruitmentcase.common.viewBinding
 import com.zows.hubxrecruitmentcase.databinding.FragmentOnboardingBinding
-import com.zows.hubxrecruitmentcase.presentation.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 

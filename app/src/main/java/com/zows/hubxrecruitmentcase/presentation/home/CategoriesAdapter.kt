@@ -2,12 +2,12 @@ package com.zows.hubxrecruitmentcase.presentation.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.zows.hubxrecruitmentcase.databinding.LayoutCategoryItemBinding
 import com.zows.hubxrecruitmentcase.domain.model.Plant
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 
 class CategoriesAdapter :
     ListAdapter<Plant, CategoriesAdapter.CategoryViewHolder>(PlantDiffCallback()) {
