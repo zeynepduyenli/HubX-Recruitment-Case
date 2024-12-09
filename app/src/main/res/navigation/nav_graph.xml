@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/onBoardingFragment">
 
     <fragment
         android:id="@+id/onBoardingFragment"
@@ -22,27 +22,11 @@
         android:id="@+id/homeFragment"
         android:name="com.zows.hubxrecruitmentcase.presentation.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/homeToPaywall"
-            app:destination="@id/paywallFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popUpTo="@id/onBoardingFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/paywallFragment"
         android:name="com.zows.hubxrecruitmentcase.presentation.paywall.PaywallFragment"
         android:label="fragment_paywall"
-        tools:layout="@layout/fragment_paywall" >
-        <action
-            android:id="@+id/paywallToHome"
-            app:destination="@id/homeFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popUpTo="@id/onBoardingFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
+        tools:layout="@layout/fragment_paywall" />
 
 </navigation>
