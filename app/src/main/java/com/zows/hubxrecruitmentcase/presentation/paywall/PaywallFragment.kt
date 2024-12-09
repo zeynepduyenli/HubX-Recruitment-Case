@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import com.zows.hubxrecruitmentcase.R
 import com.zows.hubxrecruitmentcase.common.viewBinding
 import com.zows.hubxrecruitmentcase.databinding.FragmentPaywallBinding
+import com.zows.hubxrecruitmentcase.domain.model.CardItem
 
 class PaywallFragment : Fragment(R.layout.fragment_paywall) {
 

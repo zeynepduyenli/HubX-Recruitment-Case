@@ -23,5 +23,10 @@
         android:name="com.zows.hubxrecruitmentcase.presentation.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/paywallFragment"
+        android:name="com.zows.hubxrecruitmentcase.presentation.paywall.PaywallFragment"
+        android:label="fragment_paywall"
+        tools:layout="@layout/fragment_paywall" />
 
 </navigation>

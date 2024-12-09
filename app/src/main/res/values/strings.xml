@@ -20,7 +20,7 @@
     <string name="overlay_effect">Overlay Effect</string>
     <string name="brush_underline_effect">Brush Underline Effect</string>
     <string name="premium">Premium</string>
-    <string name="plant_app">Plant App</string>
+    <string name="plant_app">PlantApp</string>
     <string name="premium_desc">Access All Features</string>
     <string name="icon">Icon</string>
     <string name="unlimited">Unlimited</string>
@@ -41,4 +41,8 @@
     <string name="close_icon">Close Icon</string>
     <string name="paywall_background_image">Paywall Background Image</string>
     <string name="radio_button">radio button</string>
+    <string name="image_home_background">Image home background</string>
+    <string name="search_for_plants">Search for plants</string>
+    <string name="premium_card_title">FREE Premium Available</string>
+    <string name="premium_card_desc">Tap to upgrade your account!</string>
 </resources>

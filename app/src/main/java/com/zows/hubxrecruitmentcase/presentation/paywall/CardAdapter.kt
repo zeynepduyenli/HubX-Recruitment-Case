@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.zows.hubxrecruitmentcase.common.setStartMargin
 import com.zows.hubxrecruitmentcase.databinding.LayoutCardItemBinding
+import com.zows.hubxrecruitmentcase.domain.model.CardItem
 
 class CardAdapter(
     private val cardItems: List<CardItem>,
