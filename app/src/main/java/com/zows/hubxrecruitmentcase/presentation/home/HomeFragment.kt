@@ -34,10 +34,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.getQuestions()
         viewModel.getCategories()
         initObserver()
-
-        with(binding){
-            premiumCard.setOnClickListener { findNavController().navigate(R.id.homeToPaywall) }
-        }
     }
 
     private fun setupRecyclerView() = with(binding) {
