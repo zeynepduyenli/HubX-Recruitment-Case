@@ -2,6 +2,7 @@ package com.zows.hubxrecruitmentcase.presentation
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                     binding.floatingActionButton.hide()
                 }
                 else -> {
-                    Handler().postDelayed(500) {
+                    Handler(Looper.getMainLooper()).postDelayed(delayInMillis = 500L) {
                         binding.bottomNav.visibility = View.VISIBLE
                         binding.floatingActionButton.show()
                     }
