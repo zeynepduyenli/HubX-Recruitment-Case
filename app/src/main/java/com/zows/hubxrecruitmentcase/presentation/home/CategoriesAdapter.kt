@@ -4,11 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.zows.hubxrecruitmentcase.common.setStartMargin
 import com.zows.hubxrecruitmentcase.databinding.LayoutCategoryItemBinding
-import com.zows.hubxrecruitmentcase.databinding.LayoutQuestionItemBinding
 import com.zows.hubxrecruitmentcase.domain.model.Plant
-import com.zows.hubxrecruitmentcase.domain.model.Question
 
 
 class CategoriesAdapter(

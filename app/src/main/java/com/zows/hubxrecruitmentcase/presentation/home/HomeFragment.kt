@@ -5,16 +5,13 @@ import android.graphics.LinearGradient
 import android.graphics.Shader
 import android.os.Bundle
 import android.view.View
-
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.zows.hubxrecruitmentcase.R
 import com.zows.hubxrecruitmentcase.common.setStatusBarTextColor
 import com.zows.hubxrecruitmentcase.common.viewBinding
 import com.zows.hubxrecruitmentcase.databinding.FragmentHomeBinding
 import com.zows.hubxrecruitmentcase.presentation.paywall.GridSpacingItemDecoration
-import com.zows.hubxrecruitmentcase.presentation.paywall.PaywallFragment
 import com.zows.hubxrecruitmentcase.presentation.paywall.SpacingItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 
