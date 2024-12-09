@@ -1,42 +1,52 @@
 package com.zows.hubxrecruitmentcase.presentation
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
+import androidx.core.os.postDelayed
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.zows.hubxrecruitmentcase.R
 import com.zows.hubxrecruitmentcase.common.viewBinding
 import com.zows.hubxrecruitmentcase.databinding.ActivityMainBinding
-import com.zows.hubxrecruitmentcase.presentation.home.HomeFragment
-import com.zows.hubxrecruitmentcase.presentation.onboarding.OnboardingFragment
-import com.zows.hubxrecruitmentcase.presentation.paywall.PaywallFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private val binding by viewBinding(ActivityMainBinding::inflate)
 
-    private lateinit var navController: NavController
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
 
-        binding.fragmentContainerView.post {
-            navController = findNavController(binding.fragmentContainerView.id)
-            navController.addOnDestinationChangedListener { _, destination, _ ->
-                binding.bottomNav.isVisible = destination.id != R.id.onBoardingFragment
-                binding.floatingActionButton.isVisible = destination.id != R.id.onBoardingFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        NavigationUI.setupWithNavController(binding.bottomNav, navHostFragment.navController)
+
+        binding.bottomNav.setOnItemSelectedListener { item ->
+            true
+        }
+
+        navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.onBoardingFragment -> {
+                    binding.bottomNav.visibility = View.GONE
+                    binding.floatingActionButton.hide()
+                }
+                R.id.paywallFragment -> {
+                    binding.bottomNav.visibility = View.GONE
+                    binding.floatingActionButton.hide()
+                }
+                else -> {
+                    Handler(Looper.getMainLooper()).postDelayed(delayInMillis = 500L) {
+                        binding.bottomNav.visibility = View.VISIBLE
+                        binding.floatingActionButton.show()
+                    }
+                }
             }
         }
     }

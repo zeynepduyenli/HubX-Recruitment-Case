@@ -7,6 +7,10 @@ import android.view.animation.AnimationUtils
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.zows.hubxrecruitmentcase.R
@@ -20,6 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
 
     private val binding by viewBinding(FragmentOnboardingBinding::bind)
+    private val viewModel by viewModels<OnboardingViewModel>()
 
     private val drawables = intArrayOf(
         R.drawable.onboarding_bg_vibrant,
@@ -28,6 +33,11 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.isOnboardingCompleted.observe(viewLifecycleOwner) { isCompleted ->
+            if (isCompleted) {
+                findNavController().navigate(R.id.onBoardingToHome)
+            }
+        }
         setupUI()
         setupViewPager()
         requireActivity().window.setStatusBarTextColor(isLightText = false)
@@ -78,7 +88,10 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
                 showPageIndicator = true,
             )
 
-            else -> showPaywallScreen()
+            else -> {
+                showPaywallScreen()
+                viewModel.completeOnboarding()
+            }
         }
     }
 
@@ -108,3 +121,9 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
     private fun goToNextPage() =
         binding.viewPager.setCurrentItem(binding.viewPager.currentItem + 1, true)
 }
+
+@Entity(tableName = "onboarding_status")
+data class OnboardingStatus(
+    @PrimaryKey val id: Int = 0,
+    val isOnboardCompleted: Boolean = false
+)

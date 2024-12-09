@@ -36,12 +36,12 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
-        style="@style/Floating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_80sdp"
-        android:clickable="false"
-        app:layout_constraintBottom_toBottomOf="@+id/bottom_nav"
+        android:contentDescription=""
+        style="@style/Floating"
+        android:layout_marginBottom="@dimen/_minus24sdp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

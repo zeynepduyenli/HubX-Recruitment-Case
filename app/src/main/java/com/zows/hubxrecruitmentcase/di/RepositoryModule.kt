@@ -1,11 +1,14 @@
 package com.zows.hubxrecruitmentcase.di
 
 import com.zows.hubxrecruitmentcase.data.repository.CategoryRepositoryImpl
+import com.zows.hubxrecruitmentcase.data.repository.OnboardingRepositoryImpl
 import com.zows.hubxrecruitmentcase.data.repository.QuestionRepositoryImpl
 import com.zows.hubxrecruitmentcase.data.retrofit.DataService
 import com.zows.hubxrecruitmentcase.data.room.CategoryDao
+import com.zows.hubxrecruitmentcase.data.room.OnboardingStatusDao
 import com.zows.hubxrecruitmentcase.data.room.QuestionDao
 import com.zows.hubxrecruitmentcase.domain.repository.CategoryRepository
+import com.zows.hubxrecruitmentcase.domain.repository.OnboardingRepository
 import com.zows.hubxrecruitmentcase.domain.repository.QuestionRepository
 import dagger.Module
 import dagger.Provides
@@ -40,5 +43,13 @@ object RepositoryModule {
     @Singleton
     fun provideDataService(retrofit: Retrofit): DataService {
         return retrofit.create(DataService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideOnboardingRepository(
+        onboardingStatusDao: OnboardingStatusDao
+    ): OnboardingRepository {
+        return OnboardingRepositoryImpl(onboardingStatusDao)
     }
 }

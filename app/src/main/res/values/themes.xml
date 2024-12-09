@@ -74,8 +74,11 @@
     <style name="Floating" parent="Widget.Design.FloatingActionButton">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">100%</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Material3.Corner.Full</item>
+        <item name="fabCradleRoundedCornerRadius">100dp</item>
+        <item name="android:radius">10dp</item>
         <item name="fabSize">normal</item>
-        <item name="fabCradleRoundedCornerRadius">@dimen/_50sdp</item>
+        <item name="tint">@color/white</item>
         <item name="backgroundTint">@color/green</item>
         <item name="srcCompat">@drawable/ic_scanner</item>
     </style>
