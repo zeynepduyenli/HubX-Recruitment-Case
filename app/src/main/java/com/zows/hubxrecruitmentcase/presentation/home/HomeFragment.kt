@@ -20,8 +20,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val binding by viewBinding(FragmentHomeBinding::bind)
     private val viewModel by viewModels<HomeViewModel>()
-    private val questionsAdapter by lazy { QuestionsAdapter(emptyList()) }
-    private val categoriesAdapter by lazy { CategoriesAdapter(emptyList()) }
+    private val questionsAdapter by lazy { QuestionsAdapter() }
+    private val categoriesAdapter by lazy { CategoriesAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,13 +35,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun setupRecyclerView() = with(binding) {
         recyclerViewQuestions.adapter = questionsAdapter
-        recyclerViewQuestions.setHasFixedSize(true)
+        //recyclerViewQuestions.setHasFixedSize(true)
         val space = resources.getDimensionPixelSize(R.dimen.spacing_medium)
         recyclerViewQuestions.addItemDecoration(SpacingItemDecoration(space))
 
         val spaceGrid = resources.getDimensionPixelSize(R.dimen.spacing_small)
         recyclerViewCategories.adapter = categoriesAdapter
-        recyclerViewCategories.setHasFixedSize(true)
+        //recyclerViewCategories.setHasFixedSize(true)
         recyclerViewCategories.addItemDecoration(GridSpacingItemDecoration(2, spaceGrid, includeEdge = true))
     }
 
@@ -69,13 +69,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun initObserver() = with(binding) {
         viewModel.questionsState.observe(viewLifecycleOwner) { state ->
             state.questionList?.let { questionList ->
-                questionsAdapter.updateList(questionList)
+                questionsAdapter.submitList(questionList)
             }
         }
 
         viewModel.categoriesState.observe(viewLifecycleOwner) { state ->
             state.categoriesList?.let { categoryList ->
-                categoriesAdapter.updateList(categoryList)
+                categoriesAdapter.submitList(categoryList)
             }
         }
     }
