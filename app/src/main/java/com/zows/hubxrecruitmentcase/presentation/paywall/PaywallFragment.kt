@@ -20,7 +20,7 @@ class PaywallFragment : Fragment(R.layout.fragment_paywall) {
             ivClose.setOnClickListener {
                 findNavController().navigate(R.id.onBoardingToHome)
             }
-            val recyclerView = layoutPremium.premiumCards.recyclerViewPremiumCards
+            val recyclerView = recyclerViewPremiumCards
 
             val cardItems = listOf(
                 CardItem("Unlimited", "Plant Identify", R.drawable.ic_scanner),
@@ -34,8 +34,8 @@ class PaywallFragment : Fragment(R.layout.fragment_paywall) {
             recyclerView.addItemDecoration(SpacingItemDecoration(space))
 
             val subscriptionButtons = listOf(
-                layoutPremium.btnSubscriptionRegular.cardRegularSubscription,
-                layoutPremium.btnSubscriptionHighlighted.cardHighlightedSubscription
+                btnSubscriptionRegular.cardRegularSubscription,
+                btnSubscriptionHighlighted.cardHighlightedSubscription
             )
 
             subscriptionButtons[1].isSelected = true
@@ -49,8 +49,8 @@ class PaywallFragment : Fragment(R.layout.fragment_paywall) {
                                 otherCard.isSelected = false
                                 // Update the radio button image for the deselected card
                                 val otherRadioButton = when (otherIndex) {
-                                    0 -> layoutPremium.btnSubscriptionRegular.radioButton
-                                    1 -> layoutPremium.btnSubscriptionHighlighted.radioButton
+                                    0 -> btnSubscriptionRegular.radioButton
+                                    1 -> btnSubscriptionHighlighted.radioButton
                                     else -> null
                                 } ?: return@forEachIndexed
 
@@ -62,8 +62,8 @@ class PaywallFragment : Fragment(R.layout.fragment_paywall) {
                         // Select the current card and update the radio button image
                         materialCardView.isSelected = true
                         val radioButton = when (index) {
-                            0 -> layoutPremium.btnSubscriptionRegular.radioButton
-                            1 -> layoutPremium.btnSubscriptionHighlighted.radioButton
+                            0 -> btnSubscriptionRegular.radioButton
+                            1 -> btnSubscriptionHighlighted.radioButton
                             else -> null
                         } ?: return@setOnClickListener
 
