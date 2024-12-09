@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -64,4 +65,8 @@ dependencies {
     implementation(libs.bundles.navigation)
     /*resizable dimens */
     implementation(libs.bundles.sspSdp)
+    implementation(libs.glide)
+    implementation(libs.kotlinx.serialization)
+
+
 }

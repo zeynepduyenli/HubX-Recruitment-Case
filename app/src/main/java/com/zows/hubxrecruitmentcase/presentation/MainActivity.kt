@@ -1,4 +1,4 @@
-package com.zows.hubxrecruitmentcase
+package com.zows.hubxrecruitmentcase.presentation
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
