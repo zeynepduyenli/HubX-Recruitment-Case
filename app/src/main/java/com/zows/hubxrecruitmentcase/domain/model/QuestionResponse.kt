@@ -4,11 +4,6 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class QuestionResponse(
-    val data: List<Question>
-)
-
-@Serializable
 data class Question(
     val id: Int,
     val title: String,

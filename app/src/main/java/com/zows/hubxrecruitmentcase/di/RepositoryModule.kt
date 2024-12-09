@@ -1,8 +1,11 @@
 package com.zows.hubxrecruitmentcase.di
 
+import com.zows.hubxrecruitmentcase.data.repository.CategoryRepositoryImpl
 import com.zows.hubxrecruitmentcase.data.repository.QuestionRepositoryImpl
 import com.zows.hubxrecruitmentcase.data.retrofit.DataService
+import com.zows.hubxrecruitmentcase.data.room.CategoryDao
 import com.zows.hubxrecruitmentcase.data.room.QuestionDao
+import com.zows.hubxrecruitmentcase.domain.repository.CategoryRepository
 import com.zows.hubxrecruitmentcase.domain.repository.QuestionRepository
 import dagger.Module
 import dagger.Provides
@@ -17,11 +20,20 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideWordRepository(
+    fun provideQuestionRepository(
         dataService: DataService,
         questionDao: QuestionDao
     ): QuestionRepository {
         return QuestionRepositoryImpl(dataService, questionDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCategoryRepository(
+        dataService: DataService,
+        categoryDao: CategoryDao
+    ): CategoryRepository {
+        return CategoryRepositoryImpl(dataService, categoryDao)
     }
 
     @Provides

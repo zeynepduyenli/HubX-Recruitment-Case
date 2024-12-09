@@ -138,7 +138,7 @@
         android:id="@+id/tv_questionsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:text="@string/get_started"
         android:fontFamily="@font/rubik_medium"
         android:textSize="@dimen/_14ssp"
@@ -152,7 +152,7 @@
         android:layout_height="wrap_content"
         android:fillViewport="true"
         android:orientation="horizontal"
-        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/tv_questionsTitle"
         app:layout_constraintStart_toStartOf="parent"
@@ -160,5 +160,19 @@
         tools:listitem="@layout/layout_question_item"
         tools:itemCount="3"/>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCategories"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/_16sdp"
+        android:clipToPadding="false"
+        android:scrollbars="none" app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recyclerViewQuestions"
+        app:spanCount="2"
+        tools:itemCount="4"
+        tools:listitem="@layout/layout_category_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

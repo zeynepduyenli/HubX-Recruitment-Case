@@ -1,5 +1,8 @@
 package com.zows.hubxrecruitmentcase.domain.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Plant(
     val id: Int,
     val name: String,

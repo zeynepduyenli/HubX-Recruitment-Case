@@ -7,4 +7,5 @@ import com.zows.hubxrecruitmentcase.data.model.QuestionEntity
 @Database(entities = [QuestionEntity::class], version = 1, exportSchema = false)
 abstract class AppDB : RoomDatabase() {
     abstract fun questionDao(): QuestionDao
+    abstract fun categoryDao(): CategoryDao
 }
