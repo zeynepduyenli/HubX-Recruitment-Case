@@ -28,20 +28,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         requireActivity().window.setStatusBarTextColor(isLightText = false)
         setupRecyclerView()
         initPremiumTitleShader()
-        viewModel.getQuestions()
+        viewModel.loadQuestions()
         viewModel.loadPlantCategories()
         initObserver()
     }
 
     private fun setupRecyclerView() = with(binding) {
         recyclerViewQuestions.adapter = questionsAdapter
-        //recyclerViewQuestions.setHasFixedSize(true)
         val space = resources.getDimensionPixelSize(R.dimen.spacing_medium)
         recyclerViewQuestions.addItemDecoration(SpacingItemDecoration(space))
 
         val spaceGrid = resources.getDimensionPixelSize(R.dimen.spacing_small)
         recyclerViewCategories.adapter = categoriesAdapter
-        //recyclerViewCategories.setHasFixedSize(true)
         recyclerViewCategories.addItemDecoration(
             GridSpacingItemDecoration(
                 2,

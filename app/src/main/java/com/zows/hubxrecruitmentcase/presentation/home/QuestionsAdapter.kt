@@ -8,21 +8,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.zows.hubxrecruitmentcase.common.setStartMargin
 import com.zows.hubxrecruitmentcase.databinding.LayoutQuestionItemBinding
-import com.zows.hubxrecruitmentcase.domain.model.Question
+import com.zows.hubxrecruitmentcase.domain.model.QuestionDomain
 
 
 class QuestionsAdapter :
-    ListAdapter<Question, QuestionsAdapter.QuestionViewHolder>(QuestionDiffCallback()) {
+    ListAdapter<QuestionDomain, QuestionsAdapter.QuestionViewHolder>(QuestionDiffCallback()) {
 
     class QuestionViewHolder(
         private val binding: LayoutQuestionItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(question: Question, position: Int) {
+        fun bind(questionDomain: QuestionDomain, position: Int) {
             with(binding) {
                 if (position == 0) root.setStartMargin(24)
-                tvQuestion.text = question.title
+                tvQuestion.text = questionDomain.title
                 Glide.with(ivQuestion.context)
-                    .load(question.imageUri)
+                    .load(questionDomain.imageUri)
                     .into(ivQuestion)
             }
         }
@@ -38,12 +38,12 @@ class QuestionsAdapter :
         holder.bind(getItem(position), position)
 
 
-    class QuestionDiffCallback : DiffUtil.ItemCallback<Question>() {
-        override fun areItemsTheSame(oldItem: Question, newItem: Question): Boolean {
+    class QuestionDiffCallback : DiffUtil.ItemCallback<QuestionDomain>() {
+        override fun areItemsTheSame(oldItem: QuestionDomain, newItem: QuestionDomain): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Question, newItem: Question): Boolean {
+        override fun areContentsTheSame(oldItem: QuestionDomain, newItem: QuestionDomain): Boolean {
             return oldItem == newItem
         }
     }

@@ -1,17 +1,17 @@
 package com.zows.hubxrecruitmentcase.domain.use_case
 
 import com.zows.hubxrecruitmentcase.common.Resource
-import com.zows.hubxrecruitmentcase.domain.model.PlantDomain
-import com.zows.hubxrecruitmentcase.domain.repository.CategoryRepository
+import com.zows.hubxrecruitmentcase.domain.model.QuestionDomain
+import com.zows.hubxrecruitmentcase.domain.repository.QuestionRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class GetPlantCategoriesUseCase @Inject constructor(private val repository: CategoryRepository) {
-    fun executeGetCategories(): Flow<Resource<List<PlantDomain>>> = flow {
+class GetQuestionsUseCase @Inject constructor(private val repository: QuestionRepository) {
+    fun executeGetQuestions(): Flow<Resource<List<QuestionDomain>>> = flow {
         try {
             emit(Resource.Loading())
-            val response = repository.categories()
+            val response = repository.questions()
             emit(response)
         } catch (e: Exception) {
             emit(Resource.Error(e))

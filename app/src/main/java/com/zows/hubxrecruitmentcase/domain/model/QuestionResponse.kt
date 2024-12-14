@@ -1,14 +1,10 @@
 package com.zows.hubxrecruitmentcase.domain.model
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-
-@Serializable
-data class Question(
+data class QuestionDomain(
     val id: Int,
     val title: String,
     val subtitle: String,
-    @SerialName("image_uri") val imageUri: String,
+    val imageUri: String,
     val uri: String,
     val order: Int
 )

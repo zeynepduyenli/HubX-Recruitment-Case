@@ -3,7 +3,7 @@ package com.zows.hubxrecruitmentcase.di
 import com.zows.hubxrecruitmentcase.data.repository.CategoryRepositoryImpl
 import com.zows.hubxrecruitmentcase.data.repository.OnboardingRepositoryImpl
 import com.zows.hubxrecruitmentcase.data.repository.QuestionRepositoryImpl
-import com.zows.hubxrecruitmentcase.data.retrofit.DataService
+import com.zows.hubxrecruitmentcase.data.retrofit.PlantAPIService
 import com.zows.hubxrecruitmentcase.data.room.CategoryDao
 import com.zows.hubxrecruitmentcase.data.room.OnboardingStatusDao
 import com.zows.hubxrecruitmentcase.data.room.QuestionDao
@@ -23,19 +23,19 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun provideQuestionRepository(
-        dataService: DataService,
+        plantAPIService: PlantAPIService,
         questionDao: QuestionDao
     ): QuestionRepository {
-        return QuestionRepositoryImpl(dataService, questionDao)
+        return QuestionRepositoryImpl(plantAPIService, questionDao)
     }
 
     @Provides
     @Singleton
     fun provideCategoryRepository(
-        dataService: DataService,
+        plantAPIService: PlantAPIService,
         categoryDao: CategoryDao
     ): CategoryRepository {
-        return CategoryRepositoryImpl(dataService, categoryDao)
+        return CategoryRepositoryImpl(plantAPIService, categoryDao)
     }
 
     @Provides

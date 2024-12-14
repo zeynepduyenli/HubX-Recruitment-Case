@@ -1,7 +1,7 @@
 package com.zows.hubxrecruitmentcase.di
 
 import com.zows.hubxrecruitmentcase.BuildConfig
-import com.zows.hubxrecruitmentcase.data.retrofit.DataService
+import com.zows.hubxrecruitmentcase.data.retrofit.PlantAPIService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,7 +34,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideDataService(retrofit: Retrofit): DataService {
-        return retrofit.create(DataService::class.java)
+    fun provideDataService(retrofit: Retrofit): PlantAPIService {
+        return retrofit.create(PlantAPIService::class.java)
     }
 }
