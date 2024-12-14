@@ -5,11 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zows.hubxrecruitmentcase.common.Resource
+import com.zows.hubxrecruitmentcase.data.model.QuestionEntity
 import com.zows.hubxrecruitmentcase.domain.model.PlantDomain
-import com.zows.hubxrecruitmentcase.domain.model.QuestionDomain
 import com.zows.hubxrecruitmentcase.domain.use_case.GetPlantCategoriesUseCase
 import com.zows.hubxrecruitmentcase.domain.use_case.GetQuestionsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -29,6 +30,12 @@ class HomeViewModel @Inject constructor(
     val categoriesState: LiveData<CategoriesState>
         get() = _categoriesState
 
+    init {
+        viewModelScope.launch {
+            loadQuestions()
+        }
+    }
+
     fun loadQuestions() {
         getQuestions()
     }
@@ -38,7 +45,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getQuestions() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             getQuestionsUseCase.executeGetQuestions()
                 .onEach { resource ->
                     when (resource) {
@@ -65,7 +72,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getPlantCategories() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             getPlantCategoriesUseCase.executeGetCategories()
                 .onEach { resource ->
                     when (resource) {
@@ -94,7 +101,7 @@ class HomeViewModel @Inject constructor(
 
 data class QuestionsState(
     val isLoading: Boolean = false,
-    val questionList: List<QuestionDomain>? = null,
+    val questionList: List<QuestionEntity> = emptyList(),
     val errorMessage: String? = null,
     val failMessage: String? = null
 )

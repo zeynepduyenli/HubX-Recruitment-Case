@@ -1,11 +1,9 @@
 package com.zows.hubxrecruitmentcase.data.repository
 
 import com.zows.hubxrecruitmentcase.common.Resource
-import com.zows.hubxrecruitmentcase.data.model.Image
-import com.zows.hubxrecruitmentcase.data.model.Plant
+import com.zows.hubxrecruitmentcase.common.toDomain
 import com.zows.hubxrecruitmentcase.data.retrofit.PlantAPIService
 import com.zows.hubxrecruitmentcase.data.room.CategoryDao
-import com.zows.hubxrecruitmentcase.domain.model.ImageDomain
 import com.zows.hubxrecruitmentcase.domain.model.PlantDomain
 import com.zows.hubxrecruitmentcase.domain.repository.CategoryRepository
 
@@ -14,13 +12,17 @@ class CategoryRepositoryImpl(
     private val categoryDao: CategoryDao
 ) : CategoryRepository {
 
+//    suspend fun categoryDaoData(): Flow<List<PlantDomain>> {
+//        return categoryDao.getPlantCategories()
+//    }
+
     override suspend fun categories(): Resource<List<PlantDomain>> {
         return try {
-            val categoryResponse = plantAPIService.allCategories()  // Get raw data from the service
-            val data = categoryResponse.data  // Assuming data is a list of plants
+            val remoteResponse = plantAPIService.allCategories()
+            val data = remoteResponse.data
 
             run {
-                val plantDomains = data.flatMap { plant -> plant.toDomain() }
+                val plantDomains = data.flatMap { it.toDomain() }
                 Resource.Success(plantDomains)
             }
         } catch (e: Exception) {
@@ -28,22 +30,32 @@ class CategoryRepositoryImpl(
         }
     }
 
-    private fun Image.toDomain(): ImageDomain {
-        return ImageDomain(
-            id = id,
-            url = this.url
-        )
-    }
+//    suspend fun localCategories(): Resource<List<Plant>> {
+//
+//    }
+//
+//    suspend fun addCategories(plant: PlantDomain) {
+//        val categoryResponse = listOf(
+//            plant.toDataModel()
+//        )
+//
+//        categoryDao.addCategories(categoryResponse)
+//    }
 
 
-    private fun Plant.toDomain(): List<PlantDomain> {
-        return listOf(
-            PlantDomain(
-                id = id,
-                title = title,
-                imageDomain = image.toDomain()
-            )
-        )
-    }
+//    private fun PlantDomain.toDataModel(): Plant {
+//        return Plant(
+//            id = this.id,
+//            title = this.title,
+//            image = this.imageDomain.toDataModel()  // Assuming you have a mapping for image
+//        )
+//    }
+//
+//    private fun ImageDomain.toDataModel(): Image {
+//        return Image(
+//            id = this.id,
+//            url = this.url
+//        )
+//    }
 }
 

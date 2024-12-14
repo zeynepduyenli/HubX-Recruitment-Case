@@ -77,10 +77,7 @@
         <item name="shapeAppearance">@style/ShapeAppearance.Material3.Corner.Full</item>
         <item name="fabCradleRoundedCornerRadius">100dp</item>
         <item name="android:radius">10dp</item>
-        <item name="fabSize">normal</item>
-        <item name="tint">@color/white</item>
-        <item name="backgroundTint">@color/green</item>
-        <item name="srcCompat">@drawable/ic_scanner</item>
+        <item name="android:foreground">@drawable/scan_button_background</item>
     </style>
 
 </resources>

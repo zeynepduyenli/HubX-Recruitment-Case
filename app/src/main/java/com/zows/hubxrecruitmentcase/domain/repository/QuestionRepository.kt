@@ -1,8 +1,9 @@
 package com.zows.hubxrecruitmentcase.domain.repository
 
 import com.zows.hubxrecruitmentcase.common.Resource
-import com.zows.hubxrecruitmentcase.domain.model.QuestionDomain
+import com.zows.hubxrecruitmentcase.data.model.QuestionEntity
 
 interface QuestionRepository {
-    suspend fun questions(): Resource<List<QuestionDomain>>
+    suspend fun fetchAndInsertAll(): Resource<List<QuestionEntity>>
+    suspend fun getAllQuestions(): List<QuestionEntity>
 }

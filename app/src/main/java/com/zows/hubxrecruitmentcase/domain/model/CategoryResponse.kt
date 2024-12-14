@@ -8,5 +8,5 @@ data class PlantDomain(
 
 data class ImageDomain(
     val id: Int,
-    val url: String,
+    val url: String
 )

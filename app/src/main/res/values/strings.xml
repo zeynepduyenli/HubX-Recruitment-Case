@@ -45,4 +45,5 @@
     <string name="search_for_plants">Search for plants</string>
     <string name="premium_card_title">FREE Premium Available</string>
     <string name="premium_card_desc">Tap to upgrade your account!</string>
+    <string name="error">There no items here</string>
 </resources>

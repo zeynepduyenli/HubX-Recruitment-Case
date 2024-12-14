@@ -3,7 +3,7 @@ package com.zows.hubxrecruitmentcase.data.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "question")
+@Entity(tableName = "question_table")
 data class QuestionEntity(
     @PrimaryKey
     val id: Int? = 0,

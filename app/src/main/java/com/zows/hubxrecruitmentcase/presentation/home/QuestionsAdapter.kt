@@ -9,26 +9,26 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.zows.hubxrecruitmentcase.common.setStartMargin
+import com.zows.hubxrecruitmentcase.data.model.QuestionEntity
 import com.zows.hubxrecruitmentcase.databinding.LayoutQuestionItemBinding
-import com.zows.hubxrecruitmentcase.domain.model.QuestionDomain
 
 
 class QuestionsAdapter :
-    ListAdapter<QuestionDomain, QuestionsAdapter.QuestionViewHolder>(QuestionDiffCallback()) {
+    ListAdapter<QuestionEntity, QuestionsAdapter.QuestionViewHolder>(QuestionDiffCallback()) {
 
     class QuestionViewHolder(
         private val binding: LayoutQuestionItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(questionDomain: QuestionDomain, position: Int) {
+        fun bind(questionEntity: QuestionEntity, position: Int) {
             with(binding) {
                 if (position == 0) root.setStartMargin(24)
-                tvQuestion.text = questionDomain.title
+                tvQuestion.text = questionEntity.title
                 Glide.with(ivQuestion.context)
-                    .load(questionDomain.imageUri)
+                    .load(questionEntity.imageUri)
                     .into(ivQuestion)
 
                 root.setOnClickListener {
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(questionDomain.uri))
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(questionEntity.uri))
                     itemView.context.startActivity(intent)
                 }
             }
@@ -45,12 +45,12 @@ class QuestionsAdapter :
         holder.bind(getItem(position), position)
 
 
-    class QuestionDiffCallback : DiffUtil.ItemCallback<QuestionDomain>() {
-        override fun areItemsTheSame(oldItem: QuestionDomain, newItem: QuestionDomain): Boolean {
+    class QuestionDiffCallback : DiffUtil.ItemCallback<QuestionEntity>() {
+        override fun areItemsTheSame(oldItem: QuestionEntity, newItem: QuestionEntity): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: QuestionDomain, newItem: QuestionDomain): Boolean {
+        override fun areContentsTheSame(oldItem: QuestionEntity, newItem: QuestionEntity): Boolean {
             return oldItem == newItem
         }
     }
