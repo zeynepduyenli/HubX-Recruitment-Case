@@ -7,11 +7,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class GetQuestionsUseCase @Inject constructor(private val repository: QuestionRepository) {
+class GetQuestionsUseCase @Inject constructor(private val questionsRepository: QuestionRepository) {
     fun executeGetQuestions(): Flow<Resource<List<QuestionEntity>>> = flow {
         try {
             emit(Resource.Loading())
-            val response = repository.fetchAndInsertAll()
+            val response = questionsRepository.fetchAndInsertAll()
             emit(response)
         } catch (e: Exception) {
             emit(Resource.Error(e))

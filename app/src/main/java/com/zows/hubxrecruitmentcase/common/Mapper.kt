@@ -1,30 +1,10 @@
 package com.zows.hubxrecruitmentcase.common
 
-import com.zows.hubxrecruitmentcase.data.model.Image
-import com.zows.hubxrecruitmentcase.data.model.Plant
+import com.zows.hubxrecruitmentcase.data.model.PlantCategoryEntity
+import com.zows.hubxrecruitmentcase.data.model.PlantCategoryResponse
 import com.zows.hubxrecruitmentcase.data.model.QuestionEntity
 import com.zows.hubxrecruitmentcase.data.model.QuestionResponse
-import com.zows.hubxrecruitmentcase.domain.model.ImageDomain
-import com.zows.hubxrecruitmentcase.domain.model.PlantDomain
 
-
-fun Image.toDomain(): ImageDomain {
-    return ImageDomain(
-        id = id,
-        url = this.url
-    )
-}
-
-
-fun Plant.toDomain(): List<PlantDomain> {
-    return listOf(
-        PlantDomain(
-            id = id,
-            title = title,
-            imageDomain = image.toDomain()
-        )
-    )
-}
 
 fun QuestionResponse.toEntity(): List<QuestionEntity> {
     return listOf(
@@ -38,3 +18,14 @@ fun QuestionResponse.toEntity(): List<QuestionEntity> {
         )
     )
 }
+
+fun PlantCategoryResponse.toEntity(): List<PlantCategoryEntity> {
+    return data.map { plant ->
+        PlantCategoryEntity(
+            id = plant.id,
+            title = plant.title,
+            url = plant.image.url
+        )
+    }
+}
+

@@ -4,18 +4,18 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.zows.hubxrecruitmentcase.data.model.CategoryEntity
+import com.zows.hubxrecruitmentcase.data.model.PlantCategoryEntity
 import com.zows.hubxrecruitmentcase.data.model.QuestionEntity
 import com.zows.hubxrecruitmentcase.presentation.onboarding.OnboardingStatus
 
 @Database(
-    entities = [QuestionEntity::class, CategoryEntity::class, OnboardingStatus::class],
+    entities = [QuestionEntity::class, PlantCategoryEntity::class, OnboardingStatus::class],
     version = 1,
     exportSchema = false
 )
 abstract class AppDB : RoomDatabase() {
     abstract fun questionDao(): QuestionDao
-    abstract fun categoryDao(): CategoryDao
+    abstract fun plantCategoryDao(): PlantCategoryDao
     abstract fun onboardingStatusDao(): OnboardingStatusDao
 
 

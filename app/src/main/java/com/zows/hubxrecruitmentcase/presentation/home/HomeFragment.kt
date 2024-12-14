@@ -22,7 +22,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val binding by viewBinding(FragmentHomeBinding::bind)
     private val viewModel by viewModels<HomeViewModel>()
     private val questionsAdapter by lazy { QuestionsAdapter() }
-    private val categoriesAdapter by lazy { CategoriesAdapter() }
+    private val plantCategoriesAdapter by lazy { PlantCategoriesAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,7 +40,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         recyclerViewQuestions.addItemDecoration(SpacingItemDecoration(space))
 
         val spaceGrid = resources.getDimensionPixelSize(R.dimen.spacing_small)
-        recyclerViewCategories.adapter = categoriesAdapter
+        recyclerViewCategories.adapter = plantCategoriesAdapter
         recyclerViewCategories.addItemDecoration(
             GridSpacingItemDecoration(
                 2,
@@ -81,8 +81,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         viewModel.categoriesState.observe(viewLifecycleOwner) { state ->
             loadingView.isVisible = state.isLoading
-            state.categoriesList?.let { categoryList ->
-                categoriesAdapter.submitList(categoryList)
+            state.plantCategoriesList?.let { plantCategoryList ->
+                plantCategoriesAdapter.submitList(plantCategoryList)
             }
         }
     }

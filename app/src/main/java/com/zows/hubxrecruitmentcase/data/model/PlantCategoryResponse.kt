@@ -3,7 +3,7 @@ package com.zows.hubxrecruitmentcase.data.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CategoryResponse(
+data class PlantCategoryResponse(
     val data: List<Plant>,
     val meta: Meta? = null
 )
@@ -11,7 +11,7 @@ data class CategoryResponse(
 @Serializable
 data class Plant(
     val id: Int? = 0,
-    val title: String? = "",
+    val title: String,
     val image: Image
 )
 

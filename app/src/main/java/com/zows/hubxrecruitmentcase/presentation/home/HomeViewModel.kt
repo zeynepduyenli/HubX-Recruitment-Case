@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zows.hubxrecruitmentcase.common.Resource
+import com.zows.hubxrecruitmentcase.data.model.PlantCategoryEntity
 import com.zows.hubxrecruitmentcase.data.model.QuestionEntity
-import com.zows.hubxrecruitmentcase.domain.model.PlantDomain
 import com.zows.hubxrecruitmentcase.domain.use_case.GetPlantCategoriesUseCase
 import com.zows.hubxrecruitmentcase.domain.use_case.GetQuestionsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,6 +33,7 @@ class HomeViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             loadQuestions()
+            loadPlantCategories()
         }
     }
 
@@ -73,7 +74,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getPlantCategories() {
         viewModelScope.launch(Dispatchers.IO) {
-            getPlantCategoriesUseCase.executeGetCategories()
+            getPlantCategoriesUseCase.executeGetPlantCategories()
                 .onEach { resource ->
                     when (resource) {
                         is Resource.Loading ->
@@ -81,7 +82,10 @@ class HomeViewModel @Inject constructor(
 
                         is Resource.Success ->
                             _categoriesState.value =
-                                CategoriesState(categoriesList = resource.data, isLoading = false)
+                                CategoriesState(
+                                    plantCategoriesList = resource.data,
+                                    isLoading = false
+                                )
 
                         is Resource.Error ->
                             _categoriesState.value = CategoriesState(
@@ -108,7 +112,7 @@ data class QuestionsState(
 
 data class CategoriesState(
     val isLoading: Boolean = false,
-    val categoriesList: List<PlantDomain>? = null,
+    val plantCategoriesList: List<PlantCategoryEntity>? = null,
     val errorMessage: String? = null,
     val failMessage: String? = null
 )

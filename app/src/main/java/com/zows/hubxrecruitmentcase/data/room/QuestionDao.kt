@@ -13,6 +13,4 @@ interface QuestionDao {
 
     @Query("SELECT * FROM question_table")
     suspend fun getAllQuestions(): List<QuestionEntity>
-
-
 }
