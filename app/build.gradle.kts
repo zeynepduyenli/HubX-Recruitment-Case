@@ -22,11 +22,17 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 
     buildTypes {
+        debug {
+            buildConfigField( "String", "BASE_URL", "\"https://dummy-api-jtg6bessta-ey.a.run.app/\"")
+        }
+
         release {
             isMinifyEnabled = false
+            buildConfigField( "String", "BASE_URL", "\"https://dummy-api-jtg6bessta-ey.a.run.app/\"")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

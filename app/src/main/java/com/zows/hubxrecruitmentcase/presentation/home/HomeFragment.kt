@@ -29,7 +29,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setupRecyclerView()
         initPremiumTitleShader()
         viewModel.getQuestions()
-        viewModel.getCategories()
+        viewModel.loadPlantCategories()
         initObserver()
     }
 
@@ -42,7 +42,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val spaceGrid = resources.getDimensionPixelSize(R.dimen.spacing_small)
         recyclerViewCategories.adapter = categoriesAdapter
         //recyclerViewCategories.setHasFixedSize(true)
-        recyclerViewCategories.addItemDecoration(GridSpacingItemDecoration(2, spaceGrid, includeEdge = true))
+        recyclerViewCategories.addItemDecoration(
+            GridSpacingItemDecoration(
+                2,
+                spaceGrid,
+                includeEdge = true
+            )
+        )
     }
 
     private fun initPremiumTitleShader() = with(binding) {

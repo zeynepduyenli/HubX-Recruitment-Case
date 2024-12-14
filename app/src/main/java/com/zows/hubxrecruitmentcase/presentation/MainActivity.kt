@@ -37,10 +37,12 @@ class MainActivity : AppCompatActivity() {
                     binding.bottomNav.visibility = View.GONE
                     binding.floatingActionButton.hide()
                 }
+
                 R.id.paywallFragment -> {
                     binding.bottomNav.visibility = View.GONE
                     binding.floatingActionButton.hide()
                 }
+
                 else -> {
                     Handler(Looper.getMainLooper()).postDelayed(delayInMillis = 500L) {
                         binding.bottomNav.visibility = View.VISIBLE

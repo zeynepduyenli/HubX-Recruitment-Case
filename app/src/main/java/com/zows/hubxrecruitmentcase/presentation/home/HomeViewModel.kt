@@ -6,18 +6,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zows.hubxrecruitmentcase.common.Resource
-import com.zows.hubxrecruitmentcase.domain.model.Plant
+import com.zows.hubxrecruitmentcase.domain.model.PlantDomain
 import com.zows.hubxrecruitmentcase.domain.model.Question
-import com.zows.hubxrecruitmentcase.domain.repository.CategoryRepository
 import com.zows.hubxrecruitmentcase.domain.repository.QuestionRepository
+import com.zows.hubxrecruitmentcase.domain.use_case.GetPlantCategoriesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val questionRepository: QuestionRepository,
-    private val categoryRepository: CategoryRepository,
+    private val getPlantCategoriesUseCase: GetPlantCategoriesUseCase,
 ) : ViewModel() {
 
     private var _questionsState = MutableLiveData(QuestionsState(isLoading = true))
@@ -48,32 +50,46 @@ class HomeViewModel @Inject constructor(
                     _questionsState.value =
                         QuestionsState(isLoading = false, errorMessage = response.throwable.message)
                 }
+
+                is Resource.Loading -> TODO()
             }
         }
     }
 
-    fun getCategories() {
+    private fun getPlantCategories() {
         viewModelScope.launch {
-            when (val response = categoryRepository.categories()) {
-                is Resource.Success -> {
-                    _categoriesState.value = CategoriesState(
-                        isLoading = false,
-                        categoriesList = response.data,
-                    )
-                    Log.d("API Test:", "Categories: ${response.data}")
-                }
+            getPlantCategoriesUseCase.executeGetCategories()
+                .onEach { resource ->
+                    when (resource) {
+                        is Resource.Loading -> {
+                            // Handle loading state
+                            _categoriesState.value = CategoriesState(isLoading = true)
+                        }
 
-                is Resource.Fail -> {
-                    _categoriesState.value =
-                        CategoriesState(isLoading = false, failMessage = response.message)
-                }
+                        is Resource.Success -> {
+                            // Handle success, no need to map again
+                            _categoriesState.value =
+                                CategoriesState(categoriesList = resource.data, isLoading = false)
+                        }
 
-                is Resource.Error -> {
-                    _categoriesState.value =
-                        CategoriesState(isLoading = false, errorMessage = response.throwable.message)
+                        is Resource.Error -> {
+                            // Handle error
+                            _categoriesState.value = CategoriesState(
+                                isLoading = false,
+                                errorMessage = resource.throwable.message
+                            )
+                        }
+
+                        is Resource.Fail -> TODO()
+                    }
                 }
-            }
+                .launchIn(viewModelScope)  // Collect the flow in the ViewModel scope
         }
+    }
+
+
+    fun loadPlantCategories() {
+        getPlantCategories()
     }
 }
 
@@ -86,7 +102,7 @@ data class QuestionsState(
 
 data class CategoriesState(
     val isLoading: Boolean = false,
-    val categoriesList: List<Plant>? = null,
+    val categoriesList: List<PlantDomain>? = null,
     val errorMessage: String? = null,
     val failMessage: String? = null
 )

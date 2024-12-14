@@ -7,19 +7,19 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.zows.hubxrecruitmentcase.databinding.LayoutCategoryItemBinding
-import com.zows.hubxrecruitmentcase.domain.model.Plant
+import com.zows.hubxrecruitmentcase.domain.model.PlantDomain
 
 class CategoriesAdapter :
-    ListAdapter<Plant, CategoriesAdapter.CategoryViewHolder>(PlantDiffCallback()) {
+    ListAdapter<PlantDomain, CategoriesAdapter.CategoryViewHolder>(PlantDiffCallback()) {
 
     class CategoryViewHolder(
         private val binding: LayoutCategoryItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(plant: Plant) {
+        fun bind(plant: PlantDomain) {
             with(binding) {
                 tvCategory.text = plant.title
                 Glide.with(ivCategory.context)
-                    .load(plant.image.url)
+                    .load(plant.imageDomain.url)
                     .into(ivCategory)
             }
         }
@@ -35,12 +35,12 @@ class CategoriesAdapter :
         holder.bind(getItem(position))
     }
 
-    class PlantDiffCallback : DiffUtil.ItemCallback<Plant>() {
-        override fun areItemsTheSame(oldItem: Plant, newItem: Plant): Boolean {
+    class PlantDiffCallback : DiffUtil.ItemCallback<PlantDomain>() {
+        override fun areItemsTheSame(oldItem: PlantDomain, newItem: PlantDomain): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Plant, newItem: Plant): Boolean {
+        override fun areContentsTheSame(oldItem: PlantDomain, newItem: PlantDomain): Boolean {
             return oldItem == newItem
         }
     }

@@ -12,7 +12,7 @@ import com.zows.hubxrecruitmentcase.domain.model.Question
 
 
 class QuestionsAdapter :
-    ListAdapter<Question, QuestionsAdapter.QuestionViewHolder>(QuestionDiffCallback())  {
+    ListAdapter<Question, QuestionsAdapter.QuestionViewHolder>(QuestionDiffCallback()) {
 
     class QuestionViewHolder(
         private val binding: LayoutQuestionItemBinding,

@@ -14,7 +14,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import retrofit2.Retrofit
 import javax.inject.Singleton
 
 @Module
@@ -37,12 +36,6 @@ object RepositoryModule {
         categoryDao: CategoryDao
     ): CategoryRepository {
         return CategoryRepositoryImpl(dataService, categoryDao)
-    }
-
-    @Provides
-    @Singleton
-    fun provideDataService(retrofit: Retrofit): DataService {
-        return retrofit.create(DataService::class.java)
     }
 
     @Provides

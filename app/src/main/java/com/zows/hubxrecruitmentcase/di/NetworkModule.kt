@@ -1,6 +1,7 @@
 package com.zows.hubxrecruitmentcase.di
 
-import com.zows.hubxrecruitmentcase.common.Constants.BASE_URL
+import com.zows.hubxrecruitmentcase.BuildConfig
+import com.zows.hubxrecruitmentcase.data.retrofit.DataService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,16 +16,25 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
 
+    private val json: Json by lazy {
+        Json {
+            isLenient = true
+            ignoreUnknownKeys = true
+        }
+    }
+
     @Provides
     @Singleton
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(
-                Json.asConverterFactory(
-                    "application/json; charset=UTF8".toMediaType()
-                )
-            )
+            .baseUrl(BuildConfig.BASE_URL)
+            .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideDataService(retrofit: Retrofit): DataService {
+        return retrofit.create(DataService::class.java)
     }
 }
