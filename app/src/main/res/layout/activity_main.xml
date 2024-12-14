@@ -40,7 +40,8 @@
         android:layout_height="wrap_content"
         android:contentDescription=""
         style="@style/Floating"
-        android:layout_marginBottom="@dimen/_minus24sdp"
+        android:layout_marginBottom="@dimen/_minus28sdp"
+        app:fabCustomSize="@dimen/_64sdp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

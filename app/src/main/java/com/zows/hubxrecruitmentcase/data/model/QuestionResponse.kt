@@ -1,10 +1,10 @@
-package com.zows.hubxrecruitmentcase.domain.model
+package com.zows.hubxrecruitmentcase.data.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Question(
+data class QuestionResponse(
     val id: Int,
     val title: String,
     val subtitle: String,

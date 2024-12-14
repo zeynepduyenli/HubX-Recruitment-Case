@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OnboardingViewModel
-    @Inject constructor(private val repository: OnboardingRepository) : ViewModel() {
+@Inject constructor(private val repository: OnboardingRepository) : ViewModel() {
     val isOnboardingCompleted = liveData {
         emit(repository.isOnboardingCompleted())
     }

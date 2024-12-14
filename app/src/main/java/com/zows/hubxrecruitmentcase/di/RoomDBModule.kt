@@ -3,8 +3,8 @@ package com.zows.hubxrecruitmentcase.di
 import android.content.Context
 import androidx.room.Room
 import com.zows.hubxrecruitmentcase.data.room.AppDB
-import com.zows.hubxrecruitmentcase.data.room.CategoryDao
 import com.zows.hubxrecruitmentcase.data.room.OnboardingStatusDao
+import com.zows.hubxrecruitmentcase.data.room.PlantCategoryDao
 import com.zows.hubxrecruitmentcase.data.room.QuestionDao
 import dagger.Module
 import dagger.Provides
@@ -32,8 +32,8 @@ class RoomDBModule {
     }
 
     @Provides
-    fun provideCategoryDao(appDB: AppDB): CategoryDao {
-        return appDB.categoryDao()
+    fun provideCategoryDao(appDB: AppDB): PlantCategoryDao {
+        return appDB.plantCategoryDao()
     }
 
     @Provides

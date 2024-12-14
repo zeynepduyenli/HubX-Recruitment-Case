@@ -15,7 +15,7 @@ kspVersion = "2.0.21-1.0.26"
 roomVersion = "2.6.1"
 retrofitVersion = "2.11.0"
 okhttp-bom = "4.12.0"
-navigation = "2.8.4"
+navigation = "2.8.5"
 kotlinx-serialization = "1.6.3"
 sspSdp = "1.1.0"
 glide = "4.16.0"
@@ -64,4 +64,3 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "kspVersion" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hiltVersion" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-

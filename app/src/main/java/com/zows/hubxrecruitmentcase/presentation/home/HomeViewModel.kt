@@ -1,23 +1,25 @@
 package com.zows.hubxrecruitmentcase.presentation.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zows.hubxrecruitmentcase.common.Resource
-import com.zows.hubxrecruitmentcase.domain.model.Plant
-import com.zows.hubxrecruitmentcase.domain.model.Question
-import com.zows.hubxrecruitmentcase.domain.repository.CategoryRepository
-import com.zows.hubxrecruitmentcase.domain.repository.QuestionRepository
+import com.zows.hubxrecruitmentcase.data.model.PlantCategoryEntity
+import com.zows.hubxrecruitmentcase.data.model.QuestionEntity
+import com.zows.hubxrecruitmentcase.domain.use_case.GetPlantCategoriesUseCase
+import com.zows.hubxrecruitmentcase.domain.use_case.GetQuestionsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val questionRepository: QuestionRepository,
-    private val categoryRepository: CategoryRepository,
+    private val getQuestionsUseCase: GetQuestionsUseCase,
+    private val getPlantCategoriesUseCase: GetPlantCategoriesUseCase,
 ) : ViewModel() {
 
     private var _questionsState = MutableLiveData(QuestionsState(isLoading = true))
@@ -28,65 +30,89 @@ class HomeViewModel @Inject constructor(
     val categoriesState: LiveData<CategoriesState>
         get() = _categoriesState
 
-    fun getQuestions() {
+    init {
         viewModelScope.launch {
-            when (val response = questionRepository.questions()) {
-                is Resource.Success -> {
-                    _questionsState.value = QuestionsState(
-                        isLoading = false,
-                        questionList = response.data,
-                    )
-                    Log.d("API Test:", "Questions: ${response.data}")
-                }
-
-                is Resource.Fail -> {
-                    _questionsState.value =
-                        QuestionsState(isLoading = false, failMessage = response.message)
-                }
-
-                is Resource.Error -> {
-                    _questionsState.value =
-                        QuestionsState(isLoading = false, errorMessage = response.throwable.message)
-                }
-            }
+            loadQuestions()
+            loadPlantCategories()
         }
     }
 
-    fun getCategories() {
-        viewModelScope.launch {
-            when (val response = categoryRepository.categories()) {
-                is Resource.Success -> {
-                    _categoriesState.value = CategoriesState(
-                        isLoading = false,
-                        categoriesList = response.data,
-                    )
-                    Log.d("API Test:", "Categories: ${response.data}")
-                }
+    fun loadQuestions() {
+        getQuestions()
+    }
 
-                is Resource.Fail -> {
-                    _categoriesState.value =
-                        CategoriesState(isLoading = false, failMessage = response.message)
-                }
+    fun loadPlantCategories() {
+        getPlantCategories()
+    }
 
-                is Resource.Error -> {
-                    _categoriesState.value =
-                        CategoriesState(isLoading = false, errorMessage = response.throwable.message)
+    private fun getQuestions() {
+        viewModelScope.launch(Dispatchers.IO) {
+            getQuestionsUseCase.executeGetQuestions()
+                .onEach { resource ->
+                    when (resource) {
+                        is Resource.Loading -> _questionsState.value =
+                            QuestionsState(isLoading = true)
+
+                        is Resource.Success ->
+                            _questionsState.value =
+                                QuestionsState(
+                                    questionList = resource.data,
+                                    isLoading = false
+                                )
+
+                        is Resource.Error -> _questionsState.value = QuestionsState(
+                            isLoading = false,
+                            errorMessage = resource.throwable.message
+                        )
+
+                        is Resource.Fail -> QuestionsState(failMessage = resource.message)
+                    }
                 }
-            }
+                .launchIn(viewModelScope)
         }
     }
+
+    private fun getPlantCategories() {
+        viewModelScope.launch(Dispatchers.IO) {
+            getPlantCategoriesUseCase.executeGetPlantCategories()
+                .onEach { resource ->
+                    when (resource) {
+                        is Resource.Loading ->
+                            _categoriesState.value = CategoriesState(isLoading = true)
+
+                        is Resource.Success ->
+                            _categoriesState.value =
+                                CategoriesState(
+                                    plantCategoriesList = resource.data,
+                                    isLoading = false
+                                )
+
+                        is Resource.Error ->
+                            _categoriesState.value = CategoriesState(
+                                isLoading = false,
+                                errorMessage = resource.throwable.message
+                            )
+
+                        is Resource.Fail -> CategoriesState(failMessage = resource.message)
+                    }
+                }
+                .launchIn(viewModelScope)
+        }
+    }
+
+
 }
 
 data class QuestionsState(
     val isLoading: Boolean = false,
-    val questionList: List<Question>? = null,
+    val questionList: List<QuestionEntity> = emptyList(),
     val errorMessage: String? = null,
     val failMessage: String? = null
 )
 
 data class CategoriesState(
     val isLoading: Boolean = false,
-    val categoriesList: List<Plant>? = null,
+    val plantCategoriesList: List<PlantCategoryEntity>? = null,
     val errorMessage: String? = null,
     val failMessage: String? = null
 )

@@ -145,6 +145,20 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <ProgressBar
+                android:id="@+id/loading_view"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/recyclerViewQuestions"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_questionsTitle" />
+
             <TextView
                 android:id="@+id/tv_questionsTitle"
                 android:layout_width="0dp"

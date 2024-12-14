@@ -5,6 +5,7 @@ import android.graphics.LinearGradient
 import android.graphics.Shader
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.zows.hubxrecruitmentcase.R
@@ -21,28 +22,32 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val binding by viewBinding(FragmentHomeBinding::bind)
     private val viewModel by viewModels<HomeViewModel>()
     private val questionsAdapter by lazy { QuestionsAdapter() }
-    private val categoriesAdapter by lazy { CategoriesAdapter() }
+    private val plantCategoriesAdapter by lazy { PlantCategoriesAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().window.setStatusBarTextColor(isLightText = false)
         setupRecyclerView()
         initPremiumTitleShader()
-        viewModel.getQuestions()
-        viewModel.getCategories()
+        viewModel.loadQuestions()
+        viewModel.loadPlantCategories()
         initObserver()
     }
 
     private fun setupRecyclerView() = with(binding) {
         recyclerViewQuestions.adapter = questionsAdapter
-        //recyclerViewQuestions.setHasFixedSize(true)
         val space = resources.getDimensionPixelSize(R.dimen.spacing_medium)
         recyclerViewQuestions.addItemDecoration(SpacingItemDecoration(space))
 
         val spaceGrid = resources.getDimensionPixelSize(R.dimen.spacing_small)
-        recyclerViewCategories.adapter = categoriesAdapter
-        //recyclerViewCategories.setHasFixedSize(true)
-        recyclerViewCategories.addItemDecoration(GridSpacingItemDecoration(2, spaceGrid, includeEdge = true))
+        recyclerViewCategories.adapter = plantCategoriesAdapter
+        recyclerViewCategories.addItemDecoration(
+            GridSpacingItemDecoration(
+                2,
+                spaceGrid,
+                includeEdge = true
+            )
+        )
     }
 
     private fun initPremiumTitleShader() = with(binding) {
@@ -68,14 +73,16 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun initObserver() = with(binding) {
         viewModel.questionsState.observe(viewLifecycleOwner) { state ->
+            loadingView.isVisible = state.isLoading
             state.questionList?.let { questionList ->
                 questionsAdapter.submitList(questionList)
             }
         }
 
         viewModel.categoriesState.observe(viewLifecycleOwner) { state ->
-            state.categoriesList?.let { categoryList ->
-                categoriesAdapter.submitList(categoryList)
+            loadingView.isVisible = state.isLoading
+            state.plantCategoriesList?.let { plantCategoryList ->
+                plantCategoriesAdapter.submitList(plantCategoryList)
             }
         }
     }
