@@ -1,5 +1,7 @@
 package com.zows.hubxrecruitmentcase.presentation.home
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -24,6 +26,11 @@ class QuestionsAdapter :
                 Glide.with(ivQuestion.context)
                     .load(questionDomain.imageUri)
                     .into(ivQuestion)
+
+                root.setOnClickListener {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(questionDomain.uri))
+                    itemView.context.startActivity(intent)
+                }
             }
         }
     }

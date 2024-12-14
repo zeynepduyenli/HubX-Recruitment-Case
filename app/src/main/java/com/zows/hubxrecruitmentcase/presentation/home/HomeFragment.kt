@@ -5,6 +5,7 @@ import android.graphics.LinearGradient
 import android.graphics.Shader
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.zows.hubxrecruitmentcase.R
@@ -72,12 +73,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun initObserver() = with(binding) {
         viewModel.questionsState.observe(viewLifecycleOwner) { state ->
+            loadingView.isVisible = state.isLoading
             state.questionList?.let { questionList ->
                 questionsAdapter.submitList(questionList)
             }
         }
 
         viewModel.categoriesState.observe(viewLifecycleOwner) { state ->
+            loadingView.isVisible = state.isLoading
             state.categoriesList?.let { categoryList ->
                 categoriesAdapter.submitList(categoryList)
             }

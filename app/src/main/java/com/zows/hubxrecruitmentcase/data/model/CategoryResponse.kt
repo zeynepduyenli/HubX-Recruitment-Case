@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CategoryResponse(
     val data: List<Plant>,
-    val meta: Meta
+    val meta: Meta? = null
 )
 
 @Serializable
