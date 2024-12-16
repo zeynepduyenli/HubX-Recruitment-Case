@@ -10,8 +10,8 @@
     app:cardCornerRadius="@dimen/_16sdp"
     app:strokeColor="@color/white"
     app:strokeWidth="@dimen/_2sdp"
-    android:layout_width="@dimen/_130sdp"
-    android:layout_height="@dimen/_130sdp">
+    android:layout_width="@dimen/_136sdp"
+    android:layout_height="@dimen/_136sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_card"
@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/rubik_medium"
-            android:layout_margin="@dimen/_16sdp"
+            android:layout_margin="@dimen/_12sdp"
             android:textColor="@color/gray"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintEnd_toEndOf="parent"

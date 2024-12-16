@@ -1,14 +1,14 @@
 package com.zows.hubxrecruitmentcase.di
 
-import com.zows.hubxrecruitmentcase.data.repository.PlantCategoryRepositoryImpl
 import com.zows.hubxrecruitmentcase.data.repository.OnboardingRepositoryImpl
+import com.zows.hubxrecruitmentcase.data.repository.PlantCategoryRepositoryImpl
 import com.zows.hubxrecruitmentcase.data.repository.QuestionRepositoryImpl
 import com.zows.hubxrecruitmentcase.data.retrofit.PlantAPIService
 import com.zows.hubxrecruitmentcase.data.room.OnboardingStatusDao
 import com.zows.hubxrecruitmentcase.data.room.PlantCategoryDao
 import com.zows.hubxrecruitmentcase.data.room.QuestionDao
-import com.zows.hubxrecruitmentcase.domain.repository.PlantCategoryRepository
 import com.zows.hubxrecruitmentcase.domain.repository.OnboardingRepository
+import com.zows.hubxrecruitmentcase.domain.repository.PlantCategoryRepository
 import com.zows.hubxrecruitmentcase.domain.repository.QuestionRepository
 import dagger.Module
 import dagger.Provides

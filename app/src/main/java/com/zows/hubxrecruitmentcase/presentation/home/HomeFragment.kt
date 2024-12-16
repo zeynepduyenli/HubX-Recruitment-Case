@@ -5,6 +5,7 @@ import android.graphics.LinearGradient
 import android.graphics.Shader
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -12,8 +13,8 @@ import com.zows.hubxrecruitmentcase.R
 import com.zows.hubxrecruitmentcase.common.setStatusBarTextColor
 import com.zows.hubxrecruitmentcase.common.viewBinding
 import com.zows.hubxrecruitmentcase.databinding.FragmentHomeBinding
-import com.zows.hubxrecruitmentcase.presentation.paywall.GridSpacingItemDecoration
 import com.zows.hubxrecruitmentcase.presentation.paywall.SpacingItemDecoration
+import com.zows.hubxrecruitmentcase.presentation.paywall.TwoColumnItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,7 +32,22 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         initPremiumTitleShader()
         viewModel.loadQuestions()
         viewModel.loadPlantCategories()
+
+        with(binding) {
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    //TODO
+                    return true
+                }
+
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return false
+                }
+            })
+        }
+
         initObserver()
+
     }
 
     private fun setupRecyclerView() = with(binding) {
@@ -41,13 +57,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         val spaceGrid = resources.getDimensionPixelSize(R.dimen.spacing_small)
         recyclerViewCategories.adapter = plantCategoriesAdapter
-        recyclerViewCategories.addItemDecoration(
-            GridSpacingItemDecoration(
-                2,
-                spaceGrid,
-                includeEdge = true
-            )
-        )
+        recyclerViewCategories.addItemDecoration(TwoColumnItemDecoration(2, spaceGrid))
     }
 
     private fun initPremiumTitleShader() = with(binding) {
@@ -86,5 +96,4 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         }
     }
-
 }

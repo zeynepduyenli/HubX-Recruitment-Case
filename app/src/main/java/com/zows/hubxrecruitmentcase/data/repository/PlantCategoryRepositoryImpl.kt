@@ -7,6 +7,7 @@ import com.zows.hubxrecruitmentcase.data.retrofit.PlantAPIService
 import com.zows.hubxrecruitmentcase.data.room.PlantCategoryDao
 import com.zows.hubxrecruitmentcase.domain.repository.PlantCategoryRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 class PlantCategoryRepositoryImpl(
@@ -42,5 +43,9 @@ class PlantCategoryRepositoryImpl(
                 return@withContext allPlantCategories
             }
         }
+
+    override fun searchPlantCategories(searchQuery: String): Flow<List<PlantCategoryEntity>> {
+        return plantCategoryDao.getSearchedPlantCategories(searchQuery)
+    }
 }
 

@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class GetPlantCategoriesUseCase @Inject constructor(private val plantCategoryRepository: PlantCategoryRepository) {
+
     fun executeGetPlantCategories(): Flow<Resource<List<PlantCategoryEntity>>> = flow {
         try {
             emit(Resource.Loading())
@@ -16,5 +17,9 @@ class GetPlantCategoriesUseCase @Inject constructor(private val plantCategoryRep
         } catch (e: Exception) {
             emit(Resource.Error(e))
         }
+    }
+
+    fun executeSearchPlantCategories(searchedTitle: String): Flow<List<PlantCategoryEntity>> {
+        return plantCategoryRepository.searchPlantCategories(searchedTitle)
     }
 }

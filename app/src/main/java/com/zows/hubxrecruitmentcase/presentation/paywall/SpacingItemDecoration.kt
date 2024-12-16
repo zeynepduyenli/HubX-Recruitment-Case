@@ -3,8 +3,9 @@ package com.zows.hubxrecruitmentcase.presentation.paywall
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 
-class SpacingItemDecoration(private val space: Int) : RecyclerView.ItemDecoration() {
+class SpacingItemDecoration(private val space: Int) : ItemDecoration() {
     override fun getItemOffsets(
         outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State
     ) {
@@ -13,11 +14,10 @@ class SpacingItemDecoration(private val space: Int) : RecyclerView.ItemDecoratio
     }
 }
 
-class GridSpacingItemDecoration(
+class TwoColumnItemDecoration(
     private val spanCount: Int,
-    private val spacing: Int,
-    private val includeEdge: Boolean
-) : RecyclerView.ItemDecoration() {
+    private val spacing: Int
+) : ItemDecoration() {
 
     override fun getItemOffsets(
         outRect: Rect,
@@ -25,24 +25,14 @@ class GridSpacingItemDecoration(
         parent: RecyclerView,
         state: RecyclerView.State
     ) {
-        val position = parent.getChildAdapterPosition(view) // item position
-        val column = position % spanCount // item column
+        val position = parent.getChildAdapterPosition(view)
+        val column = position % 2
+        val lastRowStartIndex = (state.itemCount - 1) / spanCount * spanCount
 
-        if (includeEdge) {
-            outRect.left = spacing - column * spacing / spanCount
-            outRect.right = (column + 1) * spacing / spanCount
+        outRect.left = if (column == 0) 0 else spacing
+        outRect.right = if (column == 0) spacing else 0
 
-            if (position < spanCount) { // top edge
-                outRect.top = spacing
-            }
-            outRect.bottom = spacing // item bottom
-        } else {
-            outRect.left = column * spacing / spanCount
-            outRect.right = spacing - (column + 1) * spacing / spanCount
-            if (position >= spanCount) {
-                outRect.top = spacing // item top
-            }
-        }
+        if (position >= 2) outRect.top = spacing
+        if (position >= lastRowStartIndex) outRect.bottom = 100 else outRect.bottom = spacing
     }
 }
-
