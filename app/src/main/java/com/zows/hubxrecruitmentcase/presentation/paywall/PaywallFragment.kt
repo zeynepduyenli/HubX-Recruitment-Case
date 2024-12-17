@@ -1,6 +1,7 @@
 package com.zows.hubxrecruitmentcase.presentation.paywall
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -13,13 +14,20 @@ class PaywallFragment : Fragment(R.layout.fragment_paywall) {
 
     private val binding by viewBinding(FragmentPaywallBinding::bind)
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
+            val fromScreen = arguments?.getString(ARG_FROM_SCREEN) ?: "home"
             ivClose.setOnClickListener {
-                findNavController().navigate(R.id.onBoardingToHome)
+                when (fromScreen) {
+                    "home" -> findNavController().navigate(R.id.action_paywallToHome)
+                    "onboarding" -> findNavController().navigate(R.id.action_onBoardingToHome)
+                    else -> Log.d("PaywallFragment", "Navigated from: $fromScreen")
+                }
             }
+
             val recyclerView = recyclerViewPremiumCards
 
             val cardItems = listOf(
@@ -78,8 +86,14 @@ class PaywallFragment : Fragment(R.layout.fragment_paywall) {
 
 
     companion object {
-        fun newInstance(): PaywallFragment {
-            return PaywallFragment()
+        private const val ARG_FROM_SCREEN = "fromScreen"
+
+        fun newInstance(fromScreen: String): PaywallFragment {
+            val fragment = PaywallFragment()
+            val args = Bundle()
+            args.putString(ARG_FROM_SCREEN, fromScreen)
+            fragment.arguments = args
+            return fragment
         }
     }
 }

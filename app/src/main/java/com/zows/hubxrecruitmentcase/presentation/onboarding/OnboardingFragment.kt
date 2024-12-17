@@ -35,7 +35,7 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.isOnboardingCompleted.observe(viewLifecycleOwner) { isCompleted ->
             if (isCompleted) {
-                findNavController().navigate(R.id.onBoardingToHome)
+                findNavController().navigate(R.id.action_onBoardingToHome)
             }
         }
         setupUI()

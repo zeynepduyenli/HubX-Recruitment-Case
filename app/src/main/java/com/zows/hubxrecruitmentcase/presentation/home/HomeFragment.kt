@@ -9,6 +9,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.zows.hubxrecruitmentcase.R
 import com.zows.hubxrecruitmentcase.common.setStatusBarTextColor
 import com.zows.hubxrecruitmentcase.common.viewBinding
@@ -34,6 +35,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         viewModel.loadPlantCategories()
 
         with(binding) {
+            premiumCard.setOnClickListener {
+                findNavController().navigate(R.id.action_homeToPaywall)
+            }
+
             searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextChange(newText: String?): Boolean {
                     //TODO

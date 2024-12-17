@@ -45,7 +45,7 @@ class OnboardingViewPagerAdapter(
                 img = R.drawable.onboarding_03
             )
 
-            PAYWALL_SCREEN -> PaywallFragment.newInstance()
+            PAYWALL_SCREEN -> PaywallFragment.newInstance("onboarding")
 
             else -> throw IllegalArgumentException("Invalid position: $position")
 

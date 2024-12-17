@@ -9,24 +9,62 @@
         android:id="@+id/onBoardingFragment"
         android:name="com.zows.hubxrecruitmentcase.presentation.onboarding.OnboardingFragment"
         android:label="OnBoardingFragment"
-        tools:layout="@layout/fragment_onboarding" >
+        tools:layout="@layout/fragment_onboarding">
+
         <action
-            android:id="@+id/onBoardingToHome"
+            android:id="@+id/action_onBoardingToPaywall"
+            app:destination="@id/paywallFragment">
+            <argument
+                android:name="fromScreen"
+                app:argType="string"
+                android:defaultValue="onboarding" />
+        </action>
+
+        <action
+            android:id="@+id/action_onBoardingToHome"
             app:destination="@id/homeFragment"
             app:enterAnim="@android:anim/fade_in"
             app:exitAnim="@android:anim/fade_out"
             app:popUpTo="@id/onBoardingFragment"
             app:popUpToInclusive="true" />
     </fragment>
+
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.zows.hubxrecruitmentcase.presentation.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_homeToPaywall"
+            app:destination="@id/paywallFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" >
+            <argument
+                android:name="fromScreen"
+                app:argType="string"
+                android:defaultValue="home" />
+        </action>
+    </fragment>
+
     <fragment
         android:id="@+id/paywallFragment"
         android:name="com.zows.hubxrecruitmentcase.presentation.paywall.PaywallFragment"
         android:label="fragment_paywall"
-        tools:layout="@layout/fragment_paywall" />
+        tools:layout="@layout/fragment_paywall">
+        <argument
+            android:name="fromScreen"
+            app:argType="string"
+            android:defaultValue="home" />
+        <action
+            android:id="@+id/action_paywallToHome"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
 
 </navigation>
