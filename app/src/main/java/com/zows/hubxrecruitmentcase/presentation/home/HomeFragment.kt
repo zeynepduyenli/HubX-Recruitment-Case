@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.zows.hubxrecruitmentcase.R
+import com.zows.hubxrecruitmentcase.common.hideKeyboard
 import com.zows.hubxrecruitmentcase.common.setStatusBarTextColor
 import com.zows.hubxrecruitmentcase.common.viewBinding
 import com.zows.hubxrecruitmentcase.databinding.FragmentHomeBinding
@@ -41,7 +42,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
             searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextChange(newText: String?): Boolean {
-                    //TODO
+                    if(!newText.isNullOrEmpty()){
+                        searchDatabase(newText)
+                        toggleVisibility(View.GONE)
+                    } else {
+                        toggleVisibility(View.VISIBLE)
+                        hideKeyboard(requireActivity(), view)
+                    }
                     return true
                 }
 
@@ -53,6 +60,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         initObserver()
 
+    }
+
+    private fun toggleVisibility(visibility: Int) {
+        with(binding){
+            premiumCard.visibility = visibility
+            tvQuestionsTitle.visibility = visibility
+            recyclerViewQuestions.visibility = visibility
+        }
     }
 
     private fun setupRecyclerView() = with(binding) {
@@ -100,5 +115,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 plantCategoriesAdapter.submitList(plantCategoryList)
             }
         }
+    }
+
+    private fun searchDatabase(query: String) {
+        val searchQuery = "%$query%"
+        viewModel.searchDatabase(searchQuery).observe(this, { list ->
+            list.let {
+                plantCategoriesAdapter.submitList(it)
+            }
+        })
     }
 }
