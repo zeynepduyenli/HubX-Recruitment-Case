@@ -8,13 +8,14 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_150sdp"
-        app:liftOnScroll="true"
-        android:backgroundTint="@color/home_bg">
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/home_bg"
+        app:liftOnScroll="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <ImageView
                 android:id="@+id/iv_background"
                 android:layout_width="0dp"
@@ -30,9 +31,9 @@
                 android:id="@+id/layout_greetings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginStart="@dimen/_24sdp"
+                android:layout_marginStart="@dimen/_16sdp"
                 android:layout_marginTop="@dimen/_32sdp"
+                android:orientation="vertical"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -53,18 +54,36 @@
                     android:textSize="@dimen/_20ssp" />
             </LinearLayout>
 
-            <com.google.android.material.search.SearchBar
-                android:layout_width="0dp"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/search_view_card"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_24sdp"
+                android:layout_marginHorizontal="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:layout_marginBottom="@dimen/_16sdp"
+                app:cardCornerRadius="@dimen/_8sdp"
                 android:backgroundTint="@color/transparent_search_bar_background"
-                app:searchIcon="@drawable/ic_search"
-                android:hint="@string/search_for_plants"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/light_gray"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_greetings"/>
+                app:layout_constraintTop_toBottomOf="@id/layout_greetings">
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/search_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:iconifiedByDefault="false"
+                    android:backgroundTint="@color/transparent_search_bar_background"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    android:theme="@style/CustomSearchView"
+                    app:queryHint="@string/search_for_plants"
+                    app:searchIcon="@drawable/ic_search"/>
+            </com.google.android.material.card.MaterialCardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -82,13 +101,14 @@
                 android:id="@+id/premium_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginHorizontal="@dimen/_16sdp"
                 android:background="@color/premium_card_background"
                 app:cardBackgroundColor="@color/premium_card_background"
-                app:cardCornerRadius="@dimen/_16sdp"
+                app:cardCornerRadius="@dimen/_8sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginHorizontal="@dimen/_16sdp">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -166,6 +186,7 @@
                 android:layout_marginTop="@dimen/_8sdp"
                 android:fontFamily="@font/rubik_medium"
                 android:text="@string/get_started"
+                android:letterSpacing="-0.05"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/_14ssp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -187,16 +208,16 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewCategories"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_16sdp"
-                android:layout_marginBottom="@dimen/_36sdp"
                 android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/recyclerViewQuestions"
+                app:spanCount="2"
                 tools:itemCount="6"
                 tools:listitem="@layout/layout_category_item" />
 

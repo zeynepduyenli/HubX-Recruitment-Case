@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.zows.hubxrecruitmentcase.data.model.PlantCategoryEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PlantCategoryDao {
@@ -14,6 +15,7 @@ interface PlantCategoryDao {
     @Query("SELECT * FROM plant_category_table")
     suspend fun getAllPlantCategories(): List<PlantCategoryEntity>
 
-//    @Query("SELECT * FROM category_table WHERE title LIKE :searchedTitle")
-//    suspend fun getSearchedPlantCategories(searchedTitle: String): List<PlantDomain>
+    @Query("SELECT * FROM plant_category_table WHERE title LIKE :searchQuery")
+    fun getSearchedPlantCategories(searchQuery: String): Flow<List<PlantCategoryEntity>>
+
 }

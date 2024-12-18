@@ -3,6 +3,7 @@ package com.zows.hubxrecruitmentcase.presentation.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.zows.hubxrecruitmentcase.common.Resource
 import com.zows.hubxrecruitmentcase.data.model.PlantCategoryEntity
@@ -36,6 +37,7 @@ class HomeViewModel @Inject constructor(
             loadPlantCategories()
         }
     }
+
 
     fun loadQuestions() {
         getQuestions()
@@ -100,7 +102,9 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-
+    fun searchDatabase(searchQuery: String): LiveData<List<PlantCategoryEntity>> {
+        return getPlantCategoriesUseCase.executeSearchPlantCategories(searchQuery).asLiveData()
+    }
 }
 
 data class QuestionsState(
@@ -113,6 +117,12 @@ data class QuestionsState(
 data class CategoriesState(
     val isLoading: Boolean = false,
     val plantCategoriesList: List<PlantCategoryEntity>? = null,
+    var searchedTitle: String? = null,
     val errorMessage: String? = null,
     val failMessage: String? = null
+)
+
+data class SearchState(
+    var searchText: String? = null,
+    val plantCategoriesList: List<PlantCategoryEntity>? = null,
 )

@@ -5,15 +5,18 @@ import android.graphics.LinearGradient
 import android.graphics.Shader
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.zows.hubxrecruitmentcase.R
+import com.zows.hubxrecruitmentcase.common.hideKeyboard
 import com.zows.hubxrecruitmentcase.common.setStatusBarTextColor
 import com.zows.hubxrecruitmentcase.common.viewBinding
 import com.zows.hubxrecruitmentcase.databinding.FragmentHomeBinding
-import com.zows.hubxrecruitmentcase.presentation.paywall.GridSpacingItemDecoration
 import com.zows.hubxrecruitmentcase.presentation.paywall.SpacingItemDecoration
+import com.zows.hubxrecruitmentcase.presentation.paywall.TwoColumnItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,7 +34,40 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         initPremiumTitleShader()
         viewModel.loadQuestions()
         viewModel.loadPlantCategories()
+
+        with(binding) {
+            premiumCard.setOnClickListener {
+                findNavController().navigate(R.id.action_homeToPaywall)
+            }
+
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    if(!newText.isNullOrEmpty()){
+                        searchDatabase(newText)
+                        toggleVisibility(View.GONE)
+                    } else {
+                        toggleVisibility(View.VISIBLE)
+                        hideKeyboard(requireActivity(), view)
+                    }
+                    return true
+                }
+
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return false
+                }
+            })
+        }
+
         initObserver()
+
+    }
+
+    private fun toggleVisibility(visibility: Int) {
+        with(binding){
+            premiumCard.visibility = visibility
+            tvQuestionsTitle.visibility = visibility
+            recyclerViewQuestions.visibility = visibility
+        }
     }
 
     private fun setupRecyclerView() = with(binding) {
@@ -41,13 +77,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         val spaceGrid = resources.getDimensionPixelSize(R.dimen.spacing_small)
         recyclerViewCategories.adapter = plantCategoriesAdapter
-        recyclerViewCategories.addItemDecoration(
-            GridSpacingItemDecoration(
-                2,
-                spaceGrid,
-                includeEdge = true
-            )
-        )
+        recyclerViewCategories.addItemDecoration(TwoColumnItemDecoration(2, spaceGrid))
     }
 
     private fun initPremiumTitleShader() = with(binding) {
@@ -87,4 +117,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
     }
 
+    private fun searchDatabase(query: String) {
+        val searchQuery = "%$query%"
+        viewModel.searchDatabase(searchQuery).observe(this, { list ->
+            list.let {
+                plantCategoriesAdapter.submitList(it)
+            }
+        })
+    }
 }

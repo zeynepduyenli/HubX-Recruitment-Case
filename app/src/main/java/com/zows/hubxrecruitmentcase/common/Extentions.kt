@@ -1,10 +1,12 @@
 package com.zows.hubxrecruitmentcase.common
 
+import android.app.Activity
 import android.os.Build
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowInsetsController
+import android.view.inputmethod.InputMethodManager
 import androidx.core.util.TypedValueCompat.dpToPx
 
 fun Window.setStatusBarTextColor(isLightText: Boolean) {
@@ -40,4 +42,10 @@ fun View.setStartMargin(start: Int? = null) {
 
 inline fun <reified T : ViewGroup.LayoutParams> View.layoutParams(block: T.() -> Unit) {
     if (layoutParams is T) block(layoutParams as T)
+}
+
+fun hideKeyboard(activity: Activity, view: View) {
+    val inputMethodManager =
+        activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
 }

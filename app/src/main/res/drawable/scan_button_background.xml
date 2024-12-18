@@ -5,21 +5,21 @@
         <shape android:shape="oval">
             <solid android:color="@color/light_green" />
             <size
-                android:width="@dimen/_40sdp"
-                android:height="@dimen/_40sdp" />
+                android:width="@dimen/_35sdp"
+                android:height="@dimen/_35sdp" />
         </shape>
     </item>
 
     <item
-        android:bottom="8dp"
-        android:left="8dp"
-        android:right="8dp"
-        android:top="8dp">
+        android:bottom="6dp"
+        android:left="6dp"
+        android:right="6dp"
+        android:top="6dp">
         <shape android:shape="oval">
             <solid android:color="@color/green" />
             <size
-                android:width="@dimen/_30sdp"
-                android:height="@dimen/_30sdp" />
+                android:width="@dimen/_25sdp"
+                android:height="@dimen/_25sdp" />
         </shape>
     </item>
 
