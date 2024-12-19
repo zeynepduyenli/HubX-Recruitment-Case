@@ -1,4 +1,4 @@
-package com.zows.hubxrecruitmentcase.presentation.home
+package com.zows.hubxrecruitmentcase.presentation.home.questions
 
 import android.content.Intent
 import android.net.Uri

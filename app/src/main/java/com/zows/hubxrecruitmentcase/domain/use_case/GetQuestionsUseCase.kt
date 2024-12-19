@@ -9,12 +9,6 @@ import javax.inject.Inject
 
 class GetQuestionsUseCase @Inject constructor(private val questionsRepository: QuestionRepository) {
     fun executeGetQuestions(): Flow<Resource<List<QuestionEntity>>> = flow {
-        try {
-            emit(Resource.Loading())
-            val response = questionsRepository.fetchAndInsertAll()
-            emit(response)
-        } catch (e: Exception) {
-            emit(Resource.Error(e))
-        }
+        emit(questionsRepository.fetchAndInsertAll())
     }
 }

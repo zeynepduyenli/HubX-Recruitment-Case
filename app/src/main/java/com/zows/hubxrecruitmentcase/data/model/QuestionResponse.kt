@@ -13,3 +13,16 @@ data class QuestionResponse(
     val order: Int
 )
 
+fun QuestionResponse.toEntity(): List<QuestionEntity> {
+    return listOf(
+        QuestionEntity(
+            id = id,
+            title = title,
+            subtitle = subtitle,
+            imageUri = imageUri,
+            uri = uri,
+            order = order
+        )
+    )
+}
+

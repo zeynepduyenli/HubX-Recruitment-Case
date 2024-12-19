@@ -1,14 +1,12 @@
 package com.zows.hubxrecruitmentcase.data.repository
 
 import com.zows.hubxrecruitmentcase.common.Resource
-import com.zows.hubxrecruitmentcase.common.toEntity
 import com.zows.hubxrecruitmentcase.data.model.PlantCategoryEntity
+import com.zows.hubxrecruitmentcase.data.model.toEntity
 import com.zows.hubxrecruitmentcase.data.retrofit.PlantAPIService
 import com.zows.hubxrecruitmentcase.data.room.PlantCategoryDao
 import com.zows.hubxrecruitmentcase.domain.repository.PlantCategoryRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.withContext
 
 class PlantCategoryRepositoryImpl(
     private val plantAPIService: PlantAPIService,
@@ -17,30 +15,28 @@ class PlantCategoryRepositoryImpl(
 
     private var allPlantCategories: List<PlantCategoryEntity> = emptyList()
 
-    override suspend fun fetchAndInsertAll(): Resource<List<PlantCategoryEntity>> =
-        withContext(Dispatchers.IO) {
-            val localDbData = plantCategoryDao.getAllPlantCategories()
-            if (getAllPlantCategories().isNotEmpty()) {
-                return@withContext Resource.Success(localDbData)
-            } else {
-                try {
-                    val remoteResponse = plantAPIService.allCategories()
-                    val result = remoteResponse.toEntity()
-                    plantCategoryDao.insertAll(result)
-                    Resource.Success(result)
-                } catch (e: Exception) {
-                    Resource.Error(e)
-                }
+    override suspend fun fetchAndInsertAll(): Resource<List<PlantCategoryEntity>> {
+        val localDbData = plantCategoryDao.getAllPlantCategories()
+        if (getAllPlantCategories().isNotEmpty()) {
+            return Resource.Success(localDbData)
+        } else {
+            try {
+                val remoteResponse = plantAPIService.allCategories()
+                val result = remoteResponse.toEntity()
+                plantCategoryDao.insertAll(result)
+                return Resource.Success(result)
+            } catch (e: Exception) {
+                return Resource.Error(e)
             }
         }
+    }
 
-    override suspend fun getAllPlantCategories(): List<PlantCategoryEntity> =
-        withContext(Dispatchers.IO) {
+    override suspend fun getAllPlantCategories(): List<PlantCategoryEntity> {
             if (allPlantCategories.isNotEmpty()) {
-                return@withContext allPlantCategories
+                return allPlantCategories
             } else {
                 allPlantCategories = plantCategoryDao.getAllPlantCategories()
-                return@withContext allPlantCategories
+                return allPlantCategories
             }
         }
 

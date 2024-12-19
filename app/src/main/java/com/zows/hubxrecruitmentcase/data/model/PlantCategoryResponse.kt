@@ -34,3 +34,13 @@ data class Pagination(
     val total: Int
 )
 
+fun PlantCategoryResponse.toEntity(): List<PlantCategoryEntity> {
+    return data.map { plant ->
+        PlantCategoryEntity(
+            id = plant.id,
+            title = plant.title,
+            url = plant.image.url
+        )
+    }
+}
+

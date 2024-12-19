@@ -10,13 +10,7 @@ import javax.inject.Inject
 class GetPlantCategoriesUseCase @Inject constructor(private val plantCategoryRepository: PlantCategoryRepository) {
 
     fun executeGetPlantCategories(): Flow<Resource<List<PlantCategoryEntity>>> = flow {
-        try {
-            emit(Resource.Loading())
-            val response = plantCategoryRepository.fetchAndInsertAll()
-            emit(response)
-        } catch (e: Exception) {
-            emit(Resource.Error(e))
-        }
+        emit(plantCategoryRepository.fetchAndInsertAll())
     }
 
     fun executeSearchPlantCategories(searchedTitle: String): Flow<List<PlantCategoryEntity>> {

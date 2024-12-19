@@ -1,4 +1,4 @@
-package com.zows.hubxrecruitmentcase
+package com.zows.hubxrecruitmentcase.di
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

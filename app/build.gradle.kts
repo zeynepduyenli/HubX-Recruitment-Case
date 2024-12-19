@@ -27,16 +27,17 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField( "String", "BASE_URL", "\"https://dummy-api-jtg6bessta-ey.a.run.app/\"")
+            buildConfigField("String", "BASE_URL", "\"${project.property("BASE_URL")}\"")
         }
 
         release {
             isMinifyEnabled = false
-            buildConfigField( "String", "BASE_URL", "\"https://dummy-api-jtg6bessta-ey.a.run.app/\"")
+            buildConfigField("String", "BASE_URL", "\"${project.property("BASE_URL")}\"")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
@@ -49,7 +50,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -73,8 +73,4 @@ dependencies {
     implementation(libs.bundles.sspSdp)
     implementation(libs.glide)
     implementation(libs.kotlinx.serialization)
-
-
-
-
 }

@@ -9,15 +9,20 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.zows.hubxrecruitmentcase.R
 import com.zows.hubxrecruitmentcase.common.hideKeyboard
 import com.zows.hubxrecruitmentcase.common.setStatusBarTextColor
 import com.zows.hubxrecruitmentcase.common.viewBinding
 import com.zows.hubxrecruitmentcase.databinding.FragmentHomeBinding
+import com.zows.hubxrecruitmentcase.presentation.home.categories.PlantCategoriesAdapter
+import com.zows.hubxrecruitmentcase.presentation.home.questions.QuestionsAdapter
 import com.zows.hubxrecruitmentcase.presentation.paywall.SpacingItemDecoration
 import com.zows.hubxrecruitmentcase.presentation.paywall.TwoColumnItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -32,9 +37,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         requireActivity().window.setStatusBarTextColor(isLightText = false)
         setupRecyclerView()
         initPremiumTitleShader()
-        viewModel.loadQuestions()
-        viewModel.loadPlantCategories()
+        onSearchViewObserved(view)
+        initObserver()
+    }
 
+    private fun onSearchViewObserved(view: View) {
         with(binding) {
             premiumCard.setOnClickListener {
                 findNavController().navigate(R.id.action_homeToPaywall)
@@ -42,7 +49,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
             searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextChange(newText: String?): Boolean {
-                    if(!newText.isNullOrEmpty()){
+                    if (!newText.isNullOrEmpty()) {
                         searchDatabase(newText)
                         toggleVisibility(View.GONE)
                     } else {
@@ -57,9 +64,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 }
             })
         }
-
-        initObserver()
-
     }
 
     private fun toggleVisibility(visibility: Int) {
@@ -102,27 +106,40 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun initObserver() = with(binding) {
-        viewModel.questionsState.observe(viewLifecycleOwner) { state ->
-            loadingView.isVisible = state.isLoading
-            state.questionList?.let { questionList ->
-                questionsAdapter.submitList(questionList)
+        lifecycleScope.launch {
+            combine(
+                viewModel.questionsState,
+                viewModel.categoriesState
+            ) { questionsState, categoriesState ->
+                questionsState.isLoading || categoriesState.isLoading
+            }.collect { isLoading ->
+                loadingView.isVisible = isLoading
             }
         }
 
-        viewModel.categoriesState.observe(viewLifecycleOwner) { state ->
-            loadingView.isVisible = state.isLoading
-            state.plantCategoriesList?.let { plantCategoryList ->
-                plantCategoriesAdapter.submitList(plantCategoryList)
+        lifecycleScope.launch {
+            viewModel.questionsState.collect { state ->
+                state.questionList.let { questionList ->
+                    questionsAdapter.submitList(questionList)
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.categoriesState.collect { state ->
+                state.plantCategoriesList?.let { plantCategoryList ->
+                    plantCategoriesAdapter.submitList(plantCategoryList)
+                }
             }
         }
     }
 
     private fun searchDatabase(query: String) {
         val searchQuery = "%$query%"
-        viewModel.searchDatabase(searchQuery).observe(this, { list ->
+        viewModel.searchDatabase(searchQuery).observe(this) { list ->
             list.let {
                 plantCategoriesAdapter.submitList(it)
             }
-        })
+        }
     }
 }

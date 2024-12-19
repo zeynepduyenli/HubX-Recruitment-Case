@@ -1,4 +1,4 @@
-package com.zows.hubxrecruitmentcase.presentation.home
+package com.zows.hubxrecruitmentcase.presentation.home.categories
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
